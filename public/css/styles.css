@@ -1,76 +1,163 @@
-/* Base Styles for Mobile */
+/******* Change Box Model ***************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+/* General Reset to remove default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body Styling */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+  background-color: #f4f4f9;
   color: #333;
+  line-height: 1.6;
+  background-image: url("../img/checkerboard.jpg");
 }
 
-/* Media Query for Larger Screens */
-@media screen and (min-width: 768px) {
-  /* Adjustments for tablets and desktops */
-  body {
-    font-size: 18px;
-  }
+/* Navigation Bar */
+nav {
+  background-color: #2c3e50;
+  color: white;
+  padding: 10px;
+  text-align: center;
 }
 
-/*Responsive Layout */
-.container {
+nav ul {
+  list-style-type: none;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+  color: #18bc9c;
+}
+
+/* Header Styling */
+header {
+  background: #34495e;
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+/* Main Content */
+main {
+  padding: 20px;
+}
+
+/* Inventory Section */
+.inventory-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin: 20px auto;
 }
 
-.car-card {
-  width: 100%;
+.inventory-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 300px;
+  margin: 10px;
+  padding: 15px;
+  transition: box-shadow 0.3s ease;
 }
 
-@media screen and (min-width: 768px) {
-  .car-card {
-    width: 48%; /* Two columns on larger screens */
+.inventory-item:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.inventory-item img {
+  max-width: 100%;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+
+.inventory-item h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.inventory-item p {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.inventory-item .price {
+  font-size: 20px;
+  color: #18bc9c;
+  font-weight: bold;
+}
+
+/* Buttons */
+button {
+  background-color: #18bc9c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #149173;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #2c3e50;
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+  margin-top: 20px;
+}
+
+footer p {
+  font-size: 14px;
+}
+
+/* Responsive Design for Smaller Screens */
+@media screen and (max-width: 768px) {
+  nav ul li {
+      display: block;
+      margin: 10px 0;
+  }
+
+  .inventory-container {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .inventory-item {
+      width: 90%;
   }
 }
-@media screen and (min-width: 1024px) {
-  /* Adjust styles for large screens */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-/*Flex box */
-.car-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.car-item {
-  width: 100%;
-  margin: 10px 0;
-}
-
-@media (min-width: 768px) {
-  .car-item {
-    width: 48%;
-  }
-}
-
-/* main */
-/* Example CSS (in public/css/style.css) */
-.car-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.car-item {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-    .car-item {
-        width: 48%; /* 2 items per row on larger screens */
-    }
-}
-
