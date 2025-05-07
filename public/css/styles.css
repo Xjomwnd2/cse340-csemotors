@@ -1,129 +1,105 @@
-/* Base Styles - Mobile First Approach */
-:root {
-  --primary-color: #003366;
-  --secondary-color: #4d94ff;
-  --accent-color: #ff6600;
-  --text-color: #333333;
-  --light-color: #f4f4f4;
-  --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --font-heading: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
+/* Base styles */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@400;700&display=swap');
 
+/* Add a CSS reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* Mobile view styles (Default) */
+:root {
+  --primary-color: #4c96d8;
+  --secondary-color: #333;
+  --accent-color: #fff;
+  --text-color: #333;
+  --font-heading: 'Roboto', sans-serif;
+  --font-body: 'Open Sans', sans-serif;
+}
+
 html {
   font-size: 16px;
+  height: 100%;
 }
 
 body {
-  font-family: var(--font-main);
+  font-family: var(--font-body);
   color: var(--text-color);
-  line-height: 1.6;
-  background-color: var(--light-color);
   background-image: url("../images/small_check.jpg");
   background-repeat: repeat;
 }
 
-.wrapper {
-  width: 100%;
+#wrapper {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
+  background-color: white;
 }
 
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-}
-
-a {
-  color: var(--secondary-color);
-  text-decoration: none;
-  transition: all 0.3s ease;
-}
-
-a:hover {
-  color: var(--accent-color);
-}
-
-ul {
-  list-style-position: inside;
-  margin-bottom: 1rem;
-}
-
-/* Header Styles */
-header {
-  background-color: var(--primary-color);
-  color: white;
-  padding: 1rem 0;
-}
-
-.header-container {
+/* Header styles */
+#top-header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1em 0;
+  background-color: var(--primary-color);
 }
 
-.site-name {
+#top-header .siteName {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
-  color: white;
 }
 
-.account-link {
-  color: white;
-  font-size: 0.9rem;
-}
-
-.account-link:hover {
+#top-header .siteName a {
   color: var(--accent-color);
-}
-
-/* Navigation Styles */
-nav {
-  background-color: var(--secondary-color);
-  margin-bottom: 1rem;
-}
-
-nav ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 0;
-}
-
-nav ul li {
-  padding: 0.5rem 1rem;
-}
-
-nav ul li a {
-  color: white;
+  text-decoration: none;
   font-weight: bold;
 }
 
-nav ul li a:hover {
-  color: var(--primary-color);
+#tools {
+  display: flex;
+  justify-content: center;
+}
+
+#tools a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+/* Navigation styles */
+.navWrapper {
+  background-color: var(--secondary-color);
+}
+
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  margin: 0 0.5rem;
+}
+
+nav ul li a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: var(--accent-color);
+  text-decoration: none;
+  text-align: center;
 }
 
 /* Hero Section */
 .hero {
-  background-color: white;
+  position: relative;
+  margin: 1rem 0;
   padding: 1rem;
-  margin-bottom: 1.5rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.hero h1 {
-  text-align: center;
-  margin-bottom: 1.5rem;
+  background-color: white;
 }
 
 .hero-content {
@@ -133,30 +109,39 @@ nav ul li a:hover {
 }
 
 .hero-text {
-  order: 2;
   margin-top: 1rem;
   width: 100%;
 }
 
-.hero-image {
-  order: 1;
-  max-width: 100%;
-  height: auto;
+.hero-text h2 {
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.hero-text ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .cta-button {
   display: inline-block;
-  background-color: var(--accent-color);
+  background-color: var(--primary-color);
   color: white;
-  padding: 0.5rem 1.5rem;
-  border-radius: 4px;
-  font-weight: bold;
-  margin-top: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  text-align: center;
+  margin-top: 0.5rem;
 }
 
 .cta-button:hover {
-  background-color: var(--primary-color);
-  color: white;
+  background-color: #3a87c2;
+}
+
+.hero-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
 }
 
 /* Main Grid Layout */
@@ -164,19 +149,19 @@ nav ul li a:hover {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* Reviews Section */
 .reviews {
   background-color: white;
   padding: 1rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
 }
 
 .reviews h2 {
   margin-bottom: 1rem;
-  text-align: center;
+  color: var(--primary-color);
 }
 
 .reviews ul {
@@ -185,21 +170,20 @@ nav ul li a:hover {
 
 .reviews li {
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
   padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
 }
 
 /* Upgrades Section */
 .upgrades {
   background-color: white;
   padding: 1rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
 }
 
 .upgrades h2 {
   margin-bottom: 1rem;
-  text-align: center;
+  color: var(--primary-color);
 }
 
 .upgrades-grid {
@@ -212,7 +196,6 @@ nav ul li a:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
 }
 
 .upgrade-image {
@@ -222,54 +205,59 @@ nav ul li a:hover {
   justify-content: center;
   align-items: center;
   margin-bottom: 0.5rem;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
 }
 
 .upgrade-image img {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 90%;
+  max-height: 90%;
   object-fit: contain;
+}
+
+.upgrade-item a {
+  color: var(--primary-color);
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
 }
 
 /* Footer Styles */
 footer {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   padding: 1rem 0;
   text-align: center;
   font-size: 0.8rem;
-  color: var(--text-color);
+  background-color: var(--primary-color);
+  color: white;
 }
 
-/* Media Query for tablets and larger screens */
+/* Media Queries - Tablet and up */
 @media screen and (min-width: 768px) {
   body {
     background-image: url("../images/checkerboard.jpg");
-    background-repeat: repeat;
   }
 
-  .header-container {
+  #top-header {
     flex-direction: row;
     justify-content: space-between;
-  }
-
-  .site-name {
-    margin-bottom: 0;
+    padding: 0.5rem 1rem;
   }
 
   .hero-content {
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .hero-text {
-    order: 1;
     width: 50%;
     padding-right: 1rem;
   }
-
+  
   .hero-image {
-    order: 2;
     width: 50%;
+    margin-bottom: 0;
   }
 
   .main-grid {
@@ -281,18 +269,22 @@ footer {
   }
 }
 
-/* Media Query for large screens */
+/* Media Queries - Large screens */
 @media screen and (min-width: 1024px) {
   html {
     font-size: 18px;
   }
 
-  .wrapper {
+  #wrapper {
     padding: 0 2rem;
   }
 
   nav ul {
     justify-content: flex-start;
+  }
+  
+  .upgrades-grid {
+    gap: 1.5rem;
   }
   
   /* Background remains the same as tablets - checkerboard.jpg */
