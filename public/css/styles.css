@@ -30,6 +30,13 @@ body {
   background-repeat: repeat;
 }
 
+/* MAIN CONTENT AREA */
+main {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 #wrapper {
   max-width: 1200px;
   margin: 0 auto;
