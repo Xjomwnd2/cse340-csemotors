@@ -1,149 +1,76 @@
-/* RESET STYLES */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* GLOBAL STYLES */
+/* Base Styles for Mobile */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #fff;
-  color: #000;
-  line-height: 1.6;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* Media Query for Larger Screens */
+@media screen and (min-width: 768px) {
+  /* Adjustments for tablets and desktops */
+  body {
+    font-size: 18px;
+  }
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* HEADER */
-header {
-  background-color: #000;
-  color: #fff;
-  padding: 1.5rem 1rem;
-  text-align: center;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-}
-
-/* NAVIGATION */
-nav {
-  background-color: #222;
+/*Responsive Layout */
+.container {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-nav a {
-  color: #fff;
-  padding: 1rem;
-  display: inline-block;
-  transition: background 0.3s;
+.car-card {
+  width: 100%;
 }
 
-nav a:hover {
-  background-color: #444;
+@media screen and (min-width: 768px) {
+  .car-card {
+    width: 48%; /* Two columns on larger screens */
+  }
+}
+@media screen and (min-width: 1024px) {
+  /* Adjust styles for large screens */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
 }
 
-/* HERO SECTION */
-.hero {
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
-              url('/images/hero-bg.jpg') no-repeat center center/cover;
-  color: #fff;
-  text-align: center;
-  padding: 100px 20px;
-}
-
-.hero h2 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.25rem;
-}
-
-/* MAIN CONTENT AREA */
-main {
-  padding: 2rem 1rem;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* FEATURED VEHICLES */
-.featured-cars {
-  margin-top: 2rem;
-  text-align: center;
-}
-
-.featured-cars h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 2px solid #000;
-  display: inline-block;
-  padding-bottom: 0.5rem;
-}
-
+/*Flex box */
 .car-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .car-item {
-  background-color: #fff;
-  border: 1px solid #000;
-  padding: 1rem;
-  transition: transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+  margin: 10px 0;
 }
 
-.car-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-.car-item img {
-  border-bottom: 1px solid #000;
-  margin-bottom: 1rem;
-}
-
-.car-item h3 {
-  font-size: 1.25rem;
-  color: #000;
-}
-
-/* FOOTER */
-footer {
-  background-color: #000;
-  color: #fff;
-  text-align: center;
-  padding: 2rem 1rem;
-  margin-top: 2rem;
-}
-
-/* RESPONSIVE TYPOGRAPHY */
 @media (min-width: 768px) {
-  header h1 {
-    font-size: 3rem;
-  }
-
-  .hero h2 {
-    font-size: 3.5rem;
-  }
-
-  .hero p {
-    font-size: 1.5rem;
+  .car-item {
+    width: 48%;
   }
 }
+
+/* main */
+/* Example CSS (in public/css/style.css) */
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.car-item {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .car-item {
+        width: 48%; /* 2 items per row on larger screens */
+    }
+}
+
