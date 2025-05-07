@@ -236,6 +236,9 @@ footer {
   text-align: center;
   font-size: 0.8rem;
   color: var(--text-color);
+  background-color: var(--primary-color);
+  color: white;
+  padding: 1rem 0;
 }
 
 /* Media Query for tablets and larger screens */
