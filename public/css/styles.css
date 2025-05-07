@@ -67,3 +67,80 @@ nav ul li a {
       width: 48%; /* Two items per row on larger screens */
   }
 }
+
+/* Base Styles for Mobile */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/* Media Query for Larger Screens */
+@media screen and (min-width: 768px) {
+  /* Adjustments for tablets and desktops */
+  body {
+    font-size: 18px;
+  }
+}
+
+/*Responsive Layout */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.car-card {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .car-card {
+    width: 48%; /* Two columns on larger screens */
+  }
+}
+@media screen and (min-width: 1024px) {
+  /* Adjust styles for large screens */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+/*Flex box */
+.car-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.car-item {
+  width: 100%;
+  margin: 10px 0;
+}
+
+@media (min-width: 768px) {
+  .car-item {
+    width: 48%;
+  }
+}
+
+/* main */
+/* Example CSS (in public/css/style.css) */
+.car-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.car-item {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .car-item {
+        width: 48%; /* 2 items per row on larger screens */
+    }
+}
+
