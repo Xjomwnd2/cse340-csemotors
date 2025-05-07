@@ -1,146 +1,149 @@
-/******* Change Box Model ***************/
-*,
-*:before,
-*:after {
+/* RESET STYLES */
+* {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
-/* Basic Styles */
+/* GLOBAL STYLES */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f9;
-  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
+  color: #000;
   line-height: 1.6;
-  background-image: url("../img/checkerboard.jpg");
 }
 
-header, footer {
-  background-color: #333;
-  color: white;
-  padding: 10px 0;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* HEADER */
+header {
+  background-color: #000;
+  color: #fff;
+  padding: 1.5rem 1rem;
   text-align: center;
 }
 
-nav ul {
+header h1 {
+  font-size: 2.5rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* NAVIGATION */
+nav {
+  background-color: #222;
   display: flex;
   justify-content: center;
-  list-style-type: none;
-  padding: 0;
+  flex-wrap: wrap;
 }
 
-nav ul li {
-  margin: 0 15px;
+nav a {
+  color: #fff;
+  padding: 1rem;
+  display: inline-block;
+  transition: background 0.3s;
 }
 
-nav ul li a {
-  color: white;
-  text-decoration: none;
+nav a:hover {
+  background-color: #444;
 }
 
-/* Hero Section */
+/* HERO SECTION */
 .hero {
-  background-image: url('/images/hero-bg.jpg');
-  background-size: cover;
-  color: white;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+              url('/images/hero-bg.jpg') no-repeat center center/cover;
+  color: #fff;
   text-align: center;
-  padding: 50px 20px;
+  padding: 100px 20px;
 }
 
-/* Featured Cars Section */
+.hero h2 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+}
+
+/* MAIN CONTENT AREA */
+main {
+  padding: 2rem 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* FEATURED VEHICLES */
 .featured-cars {
-  padding: 20px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.featured-cars h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #000;
+  display: inline-block;
+  padding-bottom: 0.5rem;
 }
 
 .car-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
 }
 
 .car-item {
-  width: 100%;
-  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 1rem;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
+.car-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.car-item img {
+  border-bottom: 1px solid #000;
+  margin-bottom: 1rem;
+}
+
+.car-item h3 {
+  font-size: 1.25rem;
+  color: #000;
+}
+
+/* FOOTER */
+footer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+  margin-top: 2rem;
+}
+
+/* RESPONSIVE TYPOGRAPHY */
 @media (min-width: 768px) {
-  .car-item {
-      width: 48%; /* Two items per row on larger screens */
+  header h1 {
+    font-size: 3rem;
+  }
+
+  .hero h2 {
+    font-size: 3.5rem;
+  }
+
+  .hero p {
+    font-size: 1.5rem;
   }
 }
-
-/* Base Styles for Mobile */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-  color: #333;
-}
-
-/* Media Query for Larger Screens */
-@media screen and (min-width: 768px) {
-  /* Adjustments for tablets and desktops */
-  body {
-    font-size: 18px;
-  }
-}
-
-/*Responsive Layout */
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.car-card {
-  width: 100%;
-}
-
-@media screen and (min-width: 768px) {
-  .car-card {
-    width: 48%; /* Two columns on larger screens */
-  }
-}
-@media screen and (min-width: 1024px) {
-  /* Adjust styles for large screens */
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-}
-
-/*Flex box */
-.car-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.car-item {
-  width: 100%;
-  margin: 10px 0;
-}
-
-@media (min-width: 768px) {
-  .car-item {
-    width: 48%;
-  }
-}
-
-/* main */
-/* Example CSS (in public/css/style.css) */
-.car-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.car-item {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-@media (min-width: 768px) {
-    .car-item {
-        width: 48%; /* 2 items per row on larger screens */
-    }
-}
-
