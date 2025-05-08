@@ -62,7 +62,7 @@ main section#welcome {
 
 /* DMC DELOREAN CARD BACKGROUND */
 .car-card.delorean {
-  background-image: url("/images/vehicles/delorean.jpg"); /* Replace with actual Delorean image */
+  background-image: url("/public/images/vehicles/delorean.jpg"); /* Replace with actual Delorean image */
   background-size: cover;
   background-position: center;
   color: white;
