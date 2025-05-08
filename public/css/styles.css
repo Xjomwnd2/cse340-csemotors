@@ -61,6 +61,37 @@ main section#welcome {
 }
 
 /* DMC DELOREAN CARD BACKGROUND */
+/* Code for main */
+main {
+    padding: 20px;
+}
+
+main img {
+    max-width: 100%;
+}
+
+.container {
+    position: relative;
+}
+
+.container h2 {
+    color: #4c96d7;
+}
+
+.container p {
+    color: #4c96d7;
+}
+
+.button {
+    padding: 10px;
+    text-align: center;
+    max-width: 80%;
+    color: #ffffff;
+    background-color: #4c96d7;
+    text-decoration: none;
+}
+
+
 .car-card.delorean {
   background-image: url("/public/images/vehicles/delorean.jpg"); /* Replace with actual Delorean image */
   background-size: cover;
