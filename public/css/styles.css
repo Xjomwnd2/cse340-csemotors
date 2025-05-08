@@ -1,297 +1,270 @@
-/* Base styles */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&family=Roboto:wght@400;700&display=swap');
-/* Add a CSS reset */
+/* Reset and base styles */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Mobile view styles (Default) */
-:root {
-  --primary-color: #4c96d8;
-  --secondary-color: #333;
-  --accent-color: #fff;
-  --text-color: #333;
-  --font-heading: 'Roboto', sans-serif;
-  --font-body: 'Open Sans', sans-serif;
-}
-
-html {
-  font-size: 16px;
-  height: 100%;
-}
-
 body {
-  font-family: var(--font-body);
-  color: var(--text-color);
-  background-image: url("../images/site/small_check.jpg");
-  background-repeat: repeat;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background-color: #f4f4f4;
+  color: #333;
 }
 
-/* MAIN CONTENT AREA */
-main {
-  padding: 2rem 1rem;
+/* Wrapper with checkered border */
+.wrapper {
   max-width: 1200px;
-  margin: 0 auto;
-}
-
-#wrapper {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  background-color: white;
+  margin: 20px auto;
+  background-color: #fff;
+  border: 20px solid transparent;
+  border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="10" height="10" fill="%23000"/><rect x="10" y="10" width="10" height="10" fill="%23000"/></svg>') 10;
+  padding: 15px;
+  position: relative;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 /* Header styles */
-#top-header {
+.header-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  padding: 1em 0;
-  background-color: var(--primary-color);
+  margin-bottom: 10px;
 }
 
-#top-header .siteName {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+h1 {
+  color: #333;
+  margin-bottom: 0;
 }
 
-#top-header .siteName a {
-  color: var(--accent-color);
+.account a {
+  color: #0099cc;
   text-decoration: none;
   font-weight: bold;
 }
 
-#tools {
-  display: flex;
-  justify-content: center;
+.account a:hover {
+  text-decoration: underline;
 }
 
-#tools a {
-  color: var(--accent-color);
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-/* Navigation styles */
-.navWrapper {
-  background-color: var(--secondary-color);
+/* Navigation */
+nav {
+  background-color: #333;
+  margin-bottom: 20px;
 }
 
 nav ul {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   list-style: none;
-  margin: 0;
-  padding: 0;
 }
 
-nav ul li {
-  margin: 0 0.5rem;
+nav li {
+  padding: 10px 0;
 }
 
-nav ul li a {
-  display: block;
-  padding: 0.8rem 1rem;
-  color: var(--accent-color);
+nav a {
+  color: #fff;
   text-decoration: none;
-  text-align: center;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
 }
 
-/* Hero Section */
+nav a:hover {
+  background-color: #0099cc;
+}
+
+/* Main content */
+main {
+  padding: 0 10px;
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+h3 {
+  color: #0099cc;
+  margin-bottom: 15px;
+}
+
+/* Hero section with Delorean */
 .hero {
   position: relative;
-  margin: 1rem 0;
-  padding: 1rem;
-  background-color: white;
-}
-
-.hero-content {
+  background-color: #f9f9f9;
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 5px;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  min-height: 250px;
 }
 
-.hero-text {
-  margin-top: 1rem;
-  width: 100%;
+.delorean-details {
+  width: 50%;
+  z-index: 2;
 }
 
-.hero-text h2 {
-  margin-bottom: 0.5rem;
-  color: var(--primary-color);
+.delorean-details h3 {
+  color: #0099cc;
+  margin-bottom: 10px;
 }
 
-.hero-text ul {
-  margin-left: 1.5rem;
-  margin-bottom: 1rem;
+.delorean-details ul {
+  list-style: none;
+  margin-bottom: 20px;
+  color: #0099cc;
 }
 
 .cta-button {
-  display: inline-block;
-  background-color: var(--primary-color);
+  background-color: #0099cc;
   color: white;
-  text-decoration: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.25rem;
-  text-align: center;
-  margin-top: 0.5rem;
+  border: none;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
 .cta-button:hover {
-  background-color: #3a87c2;
+  background-color: #007399;
 }
 
-.hero-image {
+.delorean-image {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delorean-image img {
   max-width: 100%;
-  height: auto;
-  margin-bottom: 1rem;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-/* Main Grid Layout */
-.main-grid {
+/* Content grid for upgrades and reviews */
+.content-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
-/* Reviews Section */
-.reviews {
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid #ddd;
-}
-
-.reviews h2 {
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-}
-
-.reviews ul {
-  list-style-type: none;
-}
-
-.reviews li {
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
-}
-
-/* Upgrades Section */
-.upgrades {
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid #ddd;
-}
-
-.upgrades h2 {
-  margin-bottom: 1rem;
-  color: var(--primary-color);
-}
-
-.upgrades-grid {
+/* Upgrades section */
+.upgrade-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 15px;
 }
 
 .upgrade-item {
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
-.upgrade-image {
-  width: 100%;
+.upgrade-item img {
+  width: 100px;
   height: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 0.5rem;
-  background-color: #f5f5f5;
+  object-fit: cover;
+  margin-bottom: 10px;
   border: 1px solid #ddd;
 }
 
-.upgrade-image img {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain;
-}
-
 .upgrade-item a {
-  color: var(--primary-color);
+  color: #0099cc;
   text-decoration: none;
-  text-align: center;
   font-weight: bold;
 }
 
-/* Footer Styles */
+.upgrade-item a:hover {
+  text-decoration: underline;
+}
+
+/* Reviews section */
+.reviews ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.reviews li {
+  margin-bottom: 10px;
+}
+
+/* Footer */
 footer {
-  margin-top: 1.5rem;
-  padding: 1rem 0;
   text-align: center;
-  font-size: 0.8rem;
-  background-color: var(--primary-color);
-  color: white;
+  margin-top: 30px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  color: #777;
+  font-size: 0.9em;
 }
 
-/* Media Queries - Tablet and up */
-@media screen and (min-width: 768px) {
-  body {
-    background-image: url("../images/site/checkerboard.jpg");
-  }
-
-  #top-header {
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 0.5rem 1rem;
-  }
-
-  .hero-content {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-  }
-
-  .hero-text {
-    width: 50%;
-    padding-right: 1rem;
+/* Responsive design */
+@media screen and (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    text-align: center;
   }
   
-  .hero-image {
-    width: 50%;
-    margin-bottom: 0;
+  .account {
+    margin-top: 10px;
   }
-
-  .main-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .upgrades-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-/* Media Queries - Large screens */
-@media screen and (min-width: 1024px) {
-  html {
-    font-size: 18px;
-  }
-
-  #wrapper {
-    padding: 0 2rem;
-  }
-
+  
   nav ul {
-    justify-content: flex-start;
+    flex-direction: column;
+    text-align: center;
   }
   
-  .upgrades-grid {
-    gap: 1.5rem;
+  nav li {
+    border-bottom: 1px solid #444;
   }
   
-  /* Background remains the same as tablets - checkerboard.jpg */
+  nav li:last-child {
+    border-bottom: none;
+  }
+  
+  .hero {
+    flex-direction: column;
+    min-height: 350px;
+  }
+  
+  .delorean-details {
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .delorean-image {
+    position: relative;
+    width: 100%;
+    height: 200px;
+  }
+  
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .upgrade-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .upgrade-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .wrapper {
+    border-width: 10px;
+  }
 }
