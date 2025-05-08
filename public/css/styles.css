@@ -26,6 +26,7 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   padding: 1rem;
+  background-image: url("../images/site/checkerboard.jpg");
 }
 
 #wrapper {
@@ -177,7 +178,7 @@ footer {
   text-align: center;
   font-size: 0.8rem;
   background-color: var(--primary-color);
-  color: white;
+  color: rgb(7, 0, 0);
 }
 
 /* === Media Queries === */
