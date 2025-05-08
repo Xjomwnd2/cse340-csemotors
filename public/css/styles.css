@@ -103,7 +103,7 @@ nav ul li a {
 
 /* HERO / MAIN SECTION */
 main section:first-of-type {
-  background-image: url('/views/index.ejs'); /* 🖼️ Place a hero.jpg in public/images */
+  background-image: url('/public/images/upgrades/bumper_sticker.jpg'); /* 🖼️ Place a hero.jpg in public/images */
   background-size: cover;
   background-position: center;
   color: white;
