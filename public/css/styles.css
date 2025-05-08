@@ -35,6 +35,50 @@ main {
   max-width: 1200px;
   margin: 0 auto;
 }
+/* images main */
+/* HERO SECTION: Welcome to CSE Motors */
+main section#welcome {
+  background-image: url("/images/site/small_check.jpg"); /* Replace with your welcome image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+#welcome h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+#welcome p {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+/* DMC DELOREAN CARD BACKGROUND */
+.car-card.delorean {
+  background-image: url("/images/vehicles/delorean.jpg"); /* Replace with actual Delorean image */
+  background-size: cover;
+  background-position: center;
+  color: white;
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+
+/* mAIN */
 
 #wrapper {
   max-width: 1200px;
