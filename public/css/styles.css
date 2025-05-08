@@ -38,7 +38,7 @@ main {
 /* images main */
 /* HERO SECTION: Welcome to CSE Motors */
 main section#welcome {
-  background-image: url("/images/site/small_check.jpg"); /* Replace with your welcome image */
+  image: url("/images/site/small_check.jpg"); /* Replace with your welcome image */
   background-size: cover;
   background-position: center;
   color: white;
