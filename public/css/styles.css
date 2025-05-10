@@ -72,6 +72,19 @@ nav a {
   text-align: center;
 }
 
+/* add Hero */
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Welcome section */
+.welcome {
+  text-align: center;
+  padding: 1rem;
+}
+/*    add     */
 .hero-content {
   background: rgba(0, 0, 0, 0.6);
   padding: 1.5rem;
