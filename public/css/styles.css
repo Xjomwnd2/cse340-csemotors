@@ -16,7 +16,9 @@ body {
   max-width: 1200px;
   margin: auto;
   padding: 1rem;
-  background: white;
+  
+  background-color: blue;
+  padding: 20px;
 }
 /* === Header === */
 #top-header {
