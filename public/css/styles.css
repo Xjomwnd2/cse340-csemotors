@@ -206,6 +206,17 @@ footer {
  /* Base styles (Mobile First) */
 
  /* Main content styles */
+.wrapper {
+  background-color: blue;
+  padding: 20px;
+}
+
+main {
+  background-color: white;
+  padding: 20px;
+}
+
+
         main {
             padding: 10px;
         }
