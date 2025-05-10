@@ -201,7 +201,65 @@ footer {
   }
 }
 
-/* main add */
+/* ********************************************* main add    ************   */
+ /* Base styles (Mobile First) */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        body {
+            max-width: 100%;
+            background-color: white;
+        }
+        
+        .site-wrapper {
+            border: 2px solid #4c96d7;
+            margin: 0 auto;
+            max-width: 100%;
+        }
+        
+        /* Header styles */
+        header {
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-name {
+            font-size: 1.5em;
+            color: #333;
+            font-weight: bold;
+        }
+        
+        .account-link {
+            text-decoration: none;
+            color: #333;
+            font-size: 0.8em;
+        }
+        
+        /* Navigation styles */
+        nav {
+            background-color: #2d3846;
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style-type: none;
+            justify-content: space-around;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            padding: 5px 10px;
+        }
+        
+
  /* Main content styles */
         main {
             padding: 10px;
