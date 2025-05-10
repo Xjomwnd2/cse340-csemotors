@@ -45,6 +45,7 @@ nav ul {
   justify-content: center;
   list-style: none;
   padding: 0.5rem 0;
+  text-align: center;
 }
 nav li {
   margin: 0.5rem 1.5rem;
