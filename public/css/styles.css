@@ -203,24 +203,7 @@ footer {
 
 /* ********************************************* main add    ************   */
  /* Base styles (Mobile First) */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        
-        body {
-            max-width: 100%;
-            background-color: white;
-        }
-        
-        .site-wrapper {
-            border: 2px solid #4c96d7;
-            margin: 0 auto;
-            max-width: 100%;
-        }
-        
+
  /* Main content styles */
         main {
             padding: 10px;
