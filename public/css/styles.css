@@ -37,6 +37,7 @@ body {
 /* === Navigation === */
 nav {
   background-color: #18bc9c;
+  text-align: center; /* centers inline or inline-block items */
 }
 nav ul {
   display: flex;
