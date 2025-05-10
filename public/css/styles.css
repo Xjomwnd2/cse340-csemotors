@@ -206,24 +206,6 @@ footer {
 
 /* ********************************************* main add    ************   */
  /* Base styles (Mobile First) */
-.navbar ul {
-  list-style: none;
-  display: flex;
-  justify-content: center; /* centers the items */
-  padding: 0;
-  margin: 0;
-  background-color: #444;
-}
-
-.navbar li {
-  margin: 0 20px;
-}
-
-.navbar a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-}
 
  /* Main content styles */
 .wrapper {
