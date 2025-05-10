@@ -38,9 +38,8 @@ body {
 nav {
   background-color: #18bc9c;
   text-align: center; /* centers inline or inline-block items */
-  background-color: #333;
-  padding: 10px;/* centers inline or inline-block items */
 }
+
 nav ul {
   display: flex;
   flex-wrap: wrap;
