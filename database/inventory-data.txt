@@ -179,3 +179,4 @@ VALUES   (
     'White',
     5
   );
+

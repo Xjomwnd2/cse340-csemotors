@@ -59,3 +59,7 @@ VALUES ('Custom'),
    ('SUV'),
    ('Truck'),
    ('Sedan');
+
+-- Data for 'inventory'
+   SELECT * FROM public.inventory
+ORDER BY inv_id ASC 
