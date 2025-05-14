@@ -149,7 +149,30 @@ nav a {
   font-weight: bold;
   text-decoration: none;
 }
-
+/* navigation */
+/* === Navigation === */
+nav {
+  background-color: #18bc9c;
+  text-align: center; /* centers inline or inline-block items */
+}
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+nav li {
+  margin: 0.5rem 1.5rem;
+}
+nav a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  text-align: center;
+}
+/* nav *?
 /* 3.3 Hero Section */
 .hero {
   background-image: url('/images/hero.jpg');
