@@ -96,6 +96,14 @@ nav a {
   text-decoration: none;
 }
 /* === Featured Cars Section === */
+/* OVERLAY */
+.overlay-text {
+  background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+/* OVERLAY END*/
 .featured-vehicles {
   margin: 2rem 0;
   text-align: center;
