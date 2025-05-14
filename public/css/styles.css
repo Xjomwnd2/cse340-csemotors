@@ -1,27 +1,16 @@
-/* ==================== GLOBAL STYLES ==================== */
-:root {
-  --primary-color: #00c3ff;
-  --secondary-color: #111827;
-  --text-dark: #000000;
-  --text-light: #ffffff;
-  --background-light: #ffffff;
-}
 
+/* === Reset and Base Styles === */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
 }
-
-html, body {
-  width: 100%;
-}
-
 body {
-  background-color: var(--background-light);
-  line-height: 1.5;
-}
+  font-family: 'Open Sans', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+  background-image: url("../images/site/checkerboard.jpg");
 /* ADD */
 body {
   background-image: 
@@ -70,388 +59,202 @@ body {
   background-color: blue;
   padding: 20px;
 }
-
-/* ==================== LAYOUT STYLES ==================== */
-#wrapper {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  background-color: var(--background-light);
-}
-
-/* Checkerboard border styling */
-.site-wrapper {
-  border: 15px solid transparent;
-  background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 40px 40px;
-  padding: 15px;
-}
-
-.content-wrapper {
-  background-color: var(--background-light);
-  padding: 20px;
-}
-
-#main-content {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 20px;
-}
-
-/* ==================== HEADER STYLES ==================== */
-header {
+/* === Header === */
+#top-header {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 0;
 }
-
-.site-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: var(--text-dark);
-  letter-spacing: 1px;
-}
-
-.account-link {
+#top-header a {
+  color: #fff;
   text-decoration: none;
-  color: var(--text-dark);
-  font-size: 14px;
+  margin-left: 1rem;
+  font-weight: bold;
 }
-
-/* ==================== NAVIGATION STYLES ==================== */
-.main-nav {
-  background-color: var(--secondary-color);
-  margin: 10px 0;
+/* === Navigation === */
+nav {
+  background-color: #18bc9c;
+  text-align: center; /* centers inline or inline-block items */
 }
-
-.nav-list {
+nav ul {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   list-style: none;
-  justify-content: space-around;
-  padding: 0;
+  padding: 0.5rem 0;
+  text-align: center;
 }
-
-.nav-item a {
-  display: block;
-  color: var(--text-light);
-  text-decoration: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+nav li {
+  margin: 0.5rem 1.5rem;
 }
-
-.nav-item a:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* ==================== MAIN CONTENT STYLES ==================== */
-.welcome-message {
-  font-size: 24px;
-  margin-bottom: 20px;
+nav a {
+  color: white;
   font-weight: bold;
+  text-decoration: none;
+  text-align: center;
 }
-
-/* ==================== DELOREAN FEATURE STYLES ==================== */
-.delorean-feature {
-  position: relative;
-  margin-bottom: 30px;
+/* === Hero Section === */
+.hero {
+  background: url('/images/hero.jpg') no-repeat center center/cover;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  text-align: center;
 }
-
-.delorean-image {
-  max-width: 100%;
+/* add Hero */
+.hero img {
+  width: 100%;
   height: auto;
+  display: block;
 }
-
-.delorean-specs {
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 15px;
-  animation: fadeIn 0.8s ease-in-out;
+/* Welcome section */
+.welcome {
+  text-align: center;
+  padding: 1rem;
 }
-
-.delorean-title {
-  color: var(--primary-color);
-  font-size: 20px;
-  margin-bottom: 5px;
+/*    add     */
+.hero-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1.5rem;
+  border-radius: 8px;
 }
-
-.delorean-specs ul {
-  list-style: none;
-  margin-bottom: 15px;
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
-
-.delorean-specs li {
-  color: var(--primary-color);
-  margin-bottom: 5px;
-}
-
-.cta-button {
-  background-color: var(--primary-color);
-  color: var(--text-dark);
-  border: none;
-  padding: 10px 25px;
-  font-size: 16px;
-  font-weight: bold;
-  cursor: pointer;
+.hero-content a {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 5px;
   text-decoration: none;
-  display: inline-block;
-  transition: background-color 0.3s ease;
 }
-
-.cta-button:hover {
-  background-color: #00a0d0;
+/* === Featured Cars Section === */
+/* OVERLAY */
+.overlay-text {
+  background-color: rgba(0, 0, 0, 0.5); /* Black with 50% transparency */
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
 }
-
-/* ==================== SECTION LAYOUT ==================== */
-.section-layout {
-  margin-bottom: 20px;
+/* OVERLAY END*/
+.featured-vehicles {
+  margin: 2rem 0;
+  text-align: center;
 }
-
-/* ==================== UPGRADES SECTION STYLES ==================== */
-.upgrades-section {
-  margin-bottom: 30px;
+.featured-vehicles .car {
+  background: #ddd;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem auto;
+  max-width: 400px;
+  background-image: url('/images/delorean.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
 }
-
-.section-title {
-  font-size: 20px;
-  margin-bottom: 15px;
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 5px;
+/* === Reviews === */
+.reviews {
+  margin-top: 2rem;
 }
-
+.reviews ul {
+  list-style: none;
+  padding-left: 1rem;
+}
+.reviews li {
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+/* === Upgrades Grid === */
+.upgrades {
+  margin-top: 2rem;
+}
 .upgrades-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
+  gap: 1rem;
 }
-
 .upgrade-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+}
+/** upgrades add **/
+/* Upgrades */
+.upgrades {
+  padding: 1rem;
+}
+.upgrades-grid {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: var(--primary-color);
-  padding: 15px;
+  gap: 1rem;
+}
+.card {
   text-align: center;
-  transition: transform 0.3s ease;
-  border-radius: 5px;
-  animation: fadeIn 0.5s ease-in-out;
 }
-
-.upgrade-item:hover {
-  transform: translateY(-5px);
+.card img {
+  max-width: 100%;
+  border-radius: 8px;
 }
-
-.upgrade-image {
-  width: 100%;
-  height: auto;
-  max-width: 100px;
-  margin-bottom: 10px;
-}
-
-.upgrade-name {
-  color: var(--text-dark);
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 14px;
-  padding: 5px 0;
-}
-
-/* ==================== REVIEWS SECTION STYLES ==================== */
-.reviews-section {
-  margin-bottom: 30px;
-}
-
-.reviews-list {
-  list-style: disc;
-  padding-left: 20px;
-}
-
-.review-item {
-  margin-bottom: 10px;
-  font-style: italic;
-}
-
-.review-text {
-  margin-right: 5px;
-}
-
-.review-rating {
-  color: #666;
-  font-style: normal;
-  font-weight: bold;
-}
-
-/* ==================== FOOTER STYLES ==================== */
-footer {
+/* Invitation section */
+.invitation {
   text-align: center;
-  padding: 15px 0;
-  font-size: 12px;
-  color: #666;
-  border-top: 1px solid #eee;
-  margin-top: 20px;
+  padding: 1rem;
 }
-
-/* ==================== ANIMATIONS ==================== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.invitation button {
+  background-color: #004aad;
+  color: white;
+  border: none;
+  padding: 0.7em 1.5em;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
-
-/* ==================== RESPONSIVE STYLES ==================== */
-/* Desktop Layout */
-@media screen and (min-width: 769px) {
-  #wrapper {
-    width: 90%;
-    margin: 20px auto;
-  }
-  
-  #main-content {
-    padding: 0;
-  }
-  
-  .section-layout {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-  }
-  
-  .upgrades-section, 
-  .reviews-section {
-    width: 48%;
-  }
-  
-  .delorean-feature {
-    height: 300px;
-    display: flex;
-    align-items: center;
-    position: relative;
-  }
-  
-  .delorean-image {
-    position: absolute;
-    right: 0;
-    max-height: 100%;
-    width: auto;
-  }
-  
-  .delorean-specs {
-    position: relative;
-    z-index: 2;
-    max-width: 200px;
-    background-color: rgba(255, 255, 255, 0.7);
-    padding: 20px;
-    border-radius: 5px;
-  }
-}
-
-/* Tablet Layout */
-@media screen and (max-width: 768px) and (min-width: 481px) {
-  .site-wrapper {
-    border-width: 12px;
-    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 35px 35px;
-    padding: 12px;
-  }
-  
-  .content-wrapper {
-    padding: 15px;
-  }
-  
-  .nav-list {
-    flex-wrap: wrap;
-  }
-  
-  .nav-item {
-    flex: 1 0 33.333%;
-    text-align: center;
-  }
-  
-  .welcome-message {
-    font-size: 22px;
-  }
-}
-
-/* Mobile Layout */
-@media screen and (max-width: 480px) {
-  .site-wrapper {
-    border-width: 10px;
-    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 30px 30px;
-    padding: 10px;
-  }
-  
-  .content-wrapper {
-    padding: 10px;
-  }
-  
-  header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-  }
-  
-  .account-link {
-    align-self: flex-end;
-    margin-top: -30px;
-  }
-  
-  .nav-list {
-    flex-wrap: wrap;
-  }
-  
-  .nav-item {
-    flex: 1 0 50%;
-    text-align: center;
-  }
-  
-  .nav-item a {
-    padding: 10px;
-    font-size: 14px;
-  }
-  
-  .welcome-message {
-    font-size: 18px;
-  }
-  
-  .delorean-specs {
-    position: static;
-    background-color: transparent;
-    padding: 10px 0;
-  }
-  
-  .delorean-image {
-    margin-bottom: 10px;
-  }
-  
-  .delorean-title {
-    font-size: 18px;
-  }
-  
-  .section-title {
-    font-size: 18px;
-  }
-  
+/* === Media Queries for Large Screens === */
+@media screen and (min-width: 768px) {
   .upgrades-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+    flex-direction: row;
+    justify-content: space-around;
   }
-  
-  .section-layout {
-    display: flex;
-    flex-direction: column;
+  .welcome, .invitation {
+    padding: 2rem 5rem;
   }
-  
-  .reviews-section {
-    order: 2;
-  }
-  
-  .upgrades-section {
-    order: 1;
-    margin-bottom: 20px;
+  .invitation button {
+    font-size: 1.1rem;
   }
 }
-/* Main content styles */
+/****  add **** add **/
+/* === Footer === */
+footer {
+  background-color: #333;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  justify-content: space-between;
+  text-align: center;
+}
+/* === Responsive Styles === */
+@media (min-width: 768px) {
+  .hero {
+    height: 400px;
+  }
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+  .upgrades-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+/* ********************************************* main add    ************   */
+ /* Base styles (Mobile First) */
+ /* Main content styles */
 .wrapper {
   background-color: blue;
   padding: 20px;
@@ -719,7 +522,5 @@ main {
                 );
             }
         }
-
+      }
 /* end main add */
-
-
