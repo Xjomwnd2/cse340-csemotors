@@ -11,7 +11,7 @@ WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
 
 -- 3. Delete Tony Stark
 DELETE FROM account
-WHERE account_email = 'tony@starkent.com';
+WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
 
 -- 4. Update GM Hummer description
 UPDATE inventory
