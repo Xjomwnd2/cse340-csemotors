@@ -19,10 +19,10 @@ SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interi
 WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 
 -- 5. Select Sport classification vehicles
-SELECT i.inv_make, i.inv_model, c.classification_name
-FROM inventory i
-INNER JOIN classification c ON i.classification_id = c.classification_id
-WHERE c.classification_name = 'Sport';
+SELECT inv.inv_make, inv.inv_model, cls.classification_name
+FROM inventory inv
+INNER JOIN classification cls ON inv.classification_id = cls.classification_id
+WHERE cls.classification_name = 'Sport';
 
 -- 6. Update image paths to include "/vehicles"
 UPDATE inventory
