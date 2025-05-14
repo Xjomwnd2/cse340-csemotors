@@ -20,7 +20,6 @@ html, body {
 
 body {
   background-color: var(--background-light);
-  line-height: 1.5;
 }
 
 /* ==================== LAYOUT STYLES ==================== */
@@ -62,7 +61,6 @@ header {
   font-size: 24px;
   font-weight: bold;
   color: var(--text-dark);
-  letter-spacing: 1px;
 }
 
 .account-link {
@@ -81,7 +79,6 @@ header {
   display: flex;
   list-style: none;
   justify-content: space-around;
-  padding: 0;
 }
 
 .nav-item a {
@@ -90,7 +87,6 @@ header {
   text-decoration: none;
   padding: 12px 20px;
   font-size: 16px;
-  transition: background-color 0.3s ease;
 }
 
 .nav-item a:hover {
@@ -98,10 +94,13 @@ header {
 }
 
 /* ==================== MAIN CONTENT STYLES ==================== */
+main {
+  padding: 20px 0;
+}
+
 .welcome-message {
   font-size: 24px;
   margin-bottom: 20px;
-  font-weight: bold;
 }
 
 /* ==================== DELOREAN FEATURE STYLES ==================== */
@@ -121,7 +120,6 @@ header {
   left: 0;
   background-color: rgba(255, 255, 255, 0.8);
   padding: 15px;
-  animation: fadeIn 0.8s ease-in-out;
 }
 
 .delorean-title {
@@ -150,16 +148,6 @@ header {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: background-color 0.3s ease;
-}
-
-.cta-button:hover {
-  background-color: #00a0d0;
-}
-
-/* ==================== SECTION LAYOUT ==================== */
-.section-layout {
-  margin-bottom: 20px;
 }
 
 /* ==================== UPGRADES SECTION STYLES ==================== */
@@ -170,8 +158,6 @@ header {
 .section-title {
   font-size: 20px;
   margin-bottom: 15px;
-  border-bottom: 2px solid var(--primary-color);
-  padding-bottom: 5px;
 }
 
 .upgrades-grid {
@@ -187,13 +173,6 @@ header {
   background-color: var(--primary-color);
   padding: 15px;
   text-align: center;
-  transition: transform 0.3s ease;
-  border-radius: 5px;
-  animation: fadeIn 0.5s ease-in-out;
-}
-
-.upgrade-item:hover {
-  transform: translateY(-5px);
 }
 
 .upgrade-image {
@@ -207,8 +186,6 @@ header {
   color: var(--text-dark);
   text-decoration: none;
   font-weight: bold;
-  font-size: 14px;
-  padding: 5px 0;
 }
 
 /* ==================== REVIEWS SECTION STYLES ==================== */
@@ -223,7 +200,6 @@ header {
 
 .review-item {
   margin-bottom: 10px;
-  font-style: italic;
 }
 
 .review-text {
@@ -232,8 +208,6 @@ header {
 
 .review-rating {
   color: #666;
-  font-style: normal;
-  font-weight: bold;
 }
 
 /* ==================== FOOTER STYLES ==================== */
@@ -242,18 +216,78 @@ footer {
   padding: 15px 0;
   font-size: 12px;
   color: #666;
-  border-top: 1px solid #eee;
-  margin-top: 20px;
-}
-
-/* ==================== ANIMATIONS ==================== */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
 }
 
 /* ==================== RESPONSIVE STYLES ==================== */
-/* Desktop Layout */
+@media screen and (max-width: 768px) {
+  .site-wrapper {
+    border-width: 10px;
+    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 30px 30px;
+    padding: 10px;
+  }
+  
+  .content-wrapper {
+    padding: 10px;
+  }
+  
+  .nav-list {
+    flex-wrap: wrap;
+  }
+  
+  .nav-item {
+    flex: 1 0 33.333%;
+    text-align: center;
+  }
+  
+  .nav-item a {
+    padding: 10px;
+    font-size: 14px;
+  }
+  
+  .welcome-message {
+    font-size: 20px;
+  }
+  
+  .delorean-specs {
+    position: static;
+    background-color: transparent;
+    padding: 10px 0;
+  }
+  
+  .delorean-image {
+    margin-bottom: 10px;
+  }
+  
+  .section-layout {
+    flex-direction: column;
+  }
+  
+  .section-layout > div {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .upgrades-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .section-title {
+    font-size: 18px;
+  }
+  
+  .welcome-message {
+    font-size: 18px;
+  }
+  
+  .delorean-title {
+    font-size: 18px;
+  }
+}
+/* ==================== ENHANCED RESPONSIVE LAYOUT ==================== */
+
+/* Desktop Layout Enhancements */
 @media screen and (min-width: 769px) {
   #wrapper {
     width: 90%;
@@ -299,44 +333,8 @@ footer {
   }
 }
 
-/* Tablet Layout */
-@media screen and (max-width: 768px) and (min-width: 481px) {
-  .site-wrapper {
-    border-width: 12px;
-    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 35px 35px;
-    padding: 12px;
-  }
-  
-  .content-wrapper {
-    padding: 15px;
-  }
-  
-  .nav-list {
-    flex-wrap: wrap;
-  }
-  
-  .nav-item {
-    flex: 1 0 33.333%;
-    text-align: center;
-  }
-  
-  .welcome-message {
-    font-size: 22px;
-  }
-}
-
-/* Mobile Layout */
-@media screen and (max-width: 480px) {
-  .site-wrapper {
-    border-width: 10px;
-    background: repeating-conic-gradient(#000 0% 25%, #fff 0% 50%) 50% / 30px 30px;
-    padding: 10px;
-  }
-  
-  .content-wrapper {
-    padding: 10px;
-  }
-  
+/* Mobile Layout Enhancements */
+@media screen and (max-width: 768px) {
   header {
     flex-direction: column;
     align-items: flex-start;
@@ -348,45 +346,18 @@ footer {
     margin-top: -30px;
   }
   
-  .nav-list {
-    flex-wrap: wrap;
-  }
-  
-  .nav-item {
-    flex: 1 0 50%;
-    text-align: center;
-  }
-  
-  .nav-item a {
-    padding: 10px;
-    font-size: 14px;
-  }
-  
-  .welcome-message {
-    font-size: 18px;
-  }
-  
-  .delorean-specs {
-    position: static;
-    background-color: transparent;
-    padding: 10px 0;
+  .delorean-feature {
+    display: flex;
+    flex-direction: column;
   }
   
   .delorean-image {
-    margin-bottom: 10px;
+    order: 1;
+    margin-bottom: 15px;
   }
   
-  .delorean-title {
-    font-size: 18px;
-  }
-  
-  .section-title {
-    font-size: 18px;
-  }
-  
-  .upgrades-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .delorean-specs {
+    order: 2;
   }
   
   .section-layout {
@@ -402,4 +373,99 @@ footer {
     order: 1;
     margin-bottom: 20px;
   }
+  
+  .upgrades-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .upgrade-item {
+    padding: 10px;
+  }
+}
+
+/* Additional Styling Enhancements */
+.site-title {
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-list {
+  padding: 0;
+}
+
+.nav-item a {
+  transition: background-color 0.3s ease;
+}
+
+.cta-button {
+  transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+  background-color: #00a0d0;
+}
+
+.upgrade-item {
+  transition: transform 0.3s ease;
+  border-radius: 5px;
+}
+
+.upgrade-item:hover {
+  transform: translateY(-5px);
+}
+
+.upgrade-name {
+  font-size: 14px;
+  padding: 5px 0;
+}
+
+.section-title {
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+/* Typography Improvements */
+body {
+  line-height: 1.5;
+}
+
+.welcome-message {
+  font-weight: bold;
+}
+
+.review-item {
+  font-style: italic;
+}
+
+.review-rating {
+  font-style: normal;
+  font-weight: bold;
+}
+
+/* Additional Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.delorean-specs {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.upgrade-item {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Checkerboard Pattern Enhancement */
+.site-wrapper {
+  position: relative;
+}
+
+/* Improved Footer */
+footer {
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+  padding-top: 15px;
 }
