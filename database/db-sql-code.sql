@@ -246,3 +246,14 @@ VALUES   (
 -- Data for 'inventory'
    SELECT * FROM public.inventory
 ORDER BY inv_id ASC 
+
+-- 4. Update GM Hummer description
+UPDATE inventory
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
+
+-- 6. Update image paths to include "/vehicles"
+UPDATE inventory
+SET 
+    inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/')
