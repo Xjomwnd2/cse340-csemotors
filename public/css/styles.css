@@ -220,7 +220,68 @@ nav a {
   padding: 10px;
   border-radius: 5px;
 }
+/* Main content styles */
+.wrapper {
+  background-color: blue;
+  padding: 20px;
+}
+main {
+  background-color: white;
+  padding: 20px;
+}
 
+        main {
+            padding: 10px;
+        }
+        
+        h1 {
+            margin: 15px 0;
+            font-size: 1.5em;
+        }
+        
+        /* Hero section */
+        .hero {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .car-details {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .car-features {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .car-features h2 {
+            color: #4c96d7;
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+        
+        .car-features ul {
+            list-style-type: none;
+            color: #4c96d7;
+            margin-bottom: 15px;
+        }
+        
+        .cta-button {
+            background-color: #4c96d7;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+        
+        .delorean-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
 /* 3.6 Reviews Section */
 .reviews {
   margin-top: 2rem;
