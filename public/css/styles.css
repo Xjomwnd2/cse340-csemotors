@@ -97,16 +97,6 @@ nav a {
   text-align: center;
 }
 /* nav */
-
-nav li {
-  margin: 0.5rem 1.5rem;
-}
-
-nav a {
-  color: white;
-  font-weight: bold;
-  text-decoration: none;
-}
 /* navigation */
 /* 3.2 Navigation - Forced Centering */
 nav {
