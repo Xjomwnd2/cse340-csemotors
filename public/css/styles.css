@@ -150,7 +150,34 @@ nav a {
   text-decoration: none;
 }
 /* navigation */
+/* 3.2 Navigation - Forced Centering */
+nav {
+  background-color: #18bc9c;
+  text-align: center !important; /* Added !important for higher precedence */
+  width: 100%; /* Ensure nav takes full width to center within */
+}
 
+nav ul {
+  display: flex !important; /* Added !important */
+  flex-wrap: wrap;
+  justify-content: center !important; /* Added !important */
+  list-style: none;
+  padding: 0.5rem 0;
+  margin: 0 auto !important; /* Center the ul element itself */
+  width: fit-content; /* Only take up the width of its content */
+}
+
+nav li {
+  margin: 0.5rem 1.5rem;
+}
+
+nav a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+/* navigation */
+/* nav */
 /* 3.3 Hero Section */
 .hero {
   background-image: url('/images/hero.jpg');
