@@ -7,7 +7,7 @@ VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
 -- 2. Make Tony an Admin
 UPDATE account
 SET account_type = 'Admin'
-WHERE account_email = 'tony@starkent.com';
+WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
 
 -- 3. Delete Tony Stark
 DELETE FROM account
