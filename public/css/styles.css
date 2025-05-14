@@ -9,8 +9,6 @@ body {
   background-color: #f4f4f4;
   color: #333;
   line-height: 1.6;
-  background-image: url("../images/site/checkerboard.jpg");
-}
 /* ADD */
 body {
   background-image: 
@@ -21,6 +19,40 @@ body {
   background-size: 40px 40px;
   background-position: 0 0, 0 20px, 20px -20px, -20px 0px;
 }
+.custom-checkbox {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  padding-left: 25px; /* Space for custom box */
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none; /* Hide native checkbox */
+}
+
+.custom-checkbox .checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 20px;
+  width: 20px;
+  background-image: url("../images/site/checkerboard.jpg");
+  background-size: cover; /* Ensures the image fills the box */
+  border: 1px solid #ccc;
+}
+
+.custom-checkbox input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid #000;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg); /* Checkmark shape */
+}
+
 /* === Wrapper === */
 #wrapper {
   max-width: 1200px;
