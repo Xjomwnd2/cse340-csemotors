@@ -1,7 +1,45 @@
+// Error handling middleware
+// Place this after all your routes but before the app.listen()
+
 // Handle 404 - Page Not Found errors
 app.use((req, res, next) => {
   res.status(404).render('errors/error', {
     title: '404: Page Not Found',
     message: `Sorry, we can't find the page <strong>${req.originalUrl}</strong>. It might have been moved, deleted, or never existed in the first place. Maybe it's hiding in the same place as missing socks?`
   });
+});
+
+// Handle 500 - Server errors
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  
+  // In development, you might want to show the actual error
+  const isDevelopment = process.env.NODE_ENV === 'development';
+  const errorMessage = isDevelopment 
+    ? `<p>${err.message}</p><pre>${err.stack}</pre>` 
+    : 'Something went wrong on our end. Our team of highly trained monkeys is already working on the problem.';
+  
+  res.status(500).render('errors/error', {
+    title: '500: Server Error',
+    message: errorMessage
+  });
+});
+
+// Example of manually rendering an error page from a route
+app.get('/example-error', (req, res) => {
+  // This demonstrates how to manually render an error page
+  res.status(403).render('errors/error', {
+    title: '403: Access Denied',
+    message: 'Nice try! But you don\'t have permission to view this page. Perhaps you forgot to say the magic word?'
+  });
+});
+
+// Example of throwing an error that will be caught by middleware
+app.get('/trigger-error', (req, res, next) => {
+  try {
+    // Simulate an error
+    throw new Error('This is a demonstration error');
+  } catch (err) {
+    next(err); // Pass to error handling middleware
+  }
 });
