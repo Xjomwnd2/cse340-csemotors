@@ -1,0 +1,7 @@
+// Handle 404 - Page Not Found errors
+app.use((req, res, next) => {
+  res.status(404).render('errors/error', {
+    title: '404: Page Not Found',
+    message: `Sorry, we can't find the page <strong>${req.originalUrl}</strong>. It might have been moved, deleted, or never existed in the first place. Maybe it's hiding in the same place as missing socks?`
+  });
+});
