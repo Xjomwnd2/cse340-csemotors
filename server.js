@@ -25,6 +25,8 @@ app.use(express.static("public"));
 app.use(static)
 // index route
 app.get("/", baseController.buildHome)
+// Inventory routes
+app.use("/inv", inventoryRoute)
 
 /* ***********************
  * Local Server Information
