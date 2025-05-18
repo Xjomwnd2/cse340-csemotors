@@ -26,8 +26,8 @@ app.set("layout", "./layouts/layout") // not at views root
  *************************/
 app.use(express.static("public"));
 app.use(static)
-// index route
-app.get("/", baseController.buildHome)
+// Index route
+app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
 // File Not Found Route - must be last route in list
