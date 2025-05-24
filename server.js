@@ -25,7 +25,7 @@ app.set("layout", "./layouts/layout") // not at views root
  * Routes
  *************************/
 app.use(express.static("public"));
-app.use(static)
+
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
