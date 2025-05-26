@@ -10,5 +10,8 @@ router.get(
   utilities.handleErrors(accountController.buildAccount)
 );
 
+// Route to build login view
+router.get("/login", utilities.handleErrors(accountController.buildLogin))
+
 // Export the router
 module.exports = router;
