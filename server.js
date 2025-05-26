@@ -70,15 +70,6 @@ app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout"); // not at views root
 
-
-// 🔐 SESSION SETUP GOES HERE 👇
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'supersecretkey123',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false } // Set to true only if using HTTPS
-}));
-
 /* ***********************
  * Routes
  *************************/
