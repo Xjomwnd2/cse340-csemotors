@@ -45,6 +45,17 @@ module.exports = { buildLogin };
   name: 'sessionId',
 }));
 
+// Error.captureStackTrace
+// Error-handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack); // logs the stack trace
+  res.status(500).json({
+    error: err.name,
+    message: err.message,
+  });
+});
+
+
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function(req, res, next){
