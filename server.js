@@ -96,6 +96,8 @@ app.use(async (req, res, next) => {
 });
 // Account routes
 app.use("/account", accountRoute);
+// Account routes
+app.use("/account", require("./routes/accountRoute"))
 
 /* ***********************
  * Local Server Information
