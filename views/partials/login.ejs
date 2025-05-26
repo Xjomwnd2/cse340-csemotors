@@ -49,8 +49,14 @@
             outline: none;
         }
         
-        input:invalid {
+        input:required:invalid, input:focus:invalid {
             border-color: #f44336;
+            background-color: #ffeaea;
+        }
+        
+        input:required:valid {
+            border-color: #4CAF50;
+            background-color: #eaffea;
         }
         
         .password-requirements {
@@ -100,7 +106,7 @@
         
         <form action="/login" method="POST">
             <label for="accountEmail">Email:</label>
-            <input type="email" name="account_email" id="accountEmail" required>
+            <input type="email" name="account_email" id="accountEmail" required placeholder="Enter a valid email address">
             
             <label for="accountPassword">Password:</label>
             <div class="password-requirements">
