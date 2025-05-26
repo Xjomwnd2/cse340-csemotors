@@ -28,7 +28,7 @@ const pool = require('./database/');
   resave: true,
   saveUninitialized: true,
   name: 'sessionId',
-}))
+}));
 
 // Express Messages Middleware
 app.use(require('connect-flash')());
