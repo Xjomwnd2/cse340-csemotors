@@ -56,7 +56,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-
 // Express Messages Middleware
 app.use(require('connect-flash')());
 app.use(function(req, res, next){
