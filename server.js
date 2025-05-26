@@ -46,6 +46,16 @@ module.exports = { buildLogin };
   name: 'sessionId',
 }));
 
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'fallbackSecret123', // fallback helps during dev
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    secure: false, // only true if you're using HTTPS (Render in production could use true)
+  }
+}));
+
+
 // Error.captureStackTrace
 // Error-handling middleware
 app.use((err, req, res, next) => {
@@ -69,7 +79,6 @@ app.use(function(req, res, next){
 app.set("view engine", "ejs");
 app.use(expressLayouts);
 app.set("layout", "./layouts/layout"); // not at views root
-
 
 /* ***********************
  * Routes
