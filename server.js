@@ -15,6 +15,8 @@ const inventoryRoute = require("./routes/inventoryRoute");
 const utilities = require("./utilities/");
 const session = require("express-session");
 const pool = require('./database/');
+const accountRoute = require("./routes/accountRoute");
+
 
 /* ***********************
  * Middleware
