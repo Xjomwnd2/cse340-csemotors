@@ -1,5 +1,8 @@
 // controllers/accountController.js
 
+const utilities = require("../utilities")  // Adjust path as needed
+
+
 const accountController = {
   login: (req, res) => {
     res.send("Login handler not implemented yet.");
@@ -8,9 +11,6 @@ const accountController = {
     res.send("Register handler not implemented yet.");
   }
 };
-
-module.exports = accountController;
-
 
 /* ****************************************
 *  Deliver registration view
@@ -23,3 +23,5 @@ async function buildRegister(req, res, next) {
     errors: null,
   })
 }
+
+module.exports = accountController;
