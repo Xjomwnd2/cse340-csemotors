@@ -15,6 +15,8 @@ router.get(
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
 
+router.get("/register", accountController.buildRegister);
+
 router.post('/register', utilities.handleErrors(accountController.registerAccount));
 
 // Export the router
