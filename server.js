@@ -83,7 +83,6 @@ app.set("layout", "./layouts/layout"); // not at views root
  * Routes
  *************************/
 // Static route
-app.use("/", static);
 app.use(express.static("public"));
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome));
@@ -93,10 +92,9 @@ app.use("/inv", inventoryRoute);
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'});
 });
+
 // Account routes
-app.use("/account", accountRoute);
-// Account routes
-app.use("/account", require("./routes/accountRoute"))
+app.use("/account", require("./routes/accountRoute"));
 
 /* ***********************
  * Local Server Information
