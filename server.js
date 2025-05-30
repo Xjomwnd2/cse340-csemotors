@@ -100,7 +100,7 @@ app.use("/account", require("./routes/accountRoute"));
  * Local Server Information
  * Values from .env (environment) file
  *************************/
-const port = process.env.PORT;
+const port = process.env.PORT || 5501;
 const host = process.env.HOST;
 
 /* ***********************
