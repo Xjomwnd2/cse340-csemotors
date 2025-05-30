@@ -9,16 +9,6 @@ if (process.env.NODE_ENV === "development") {
     // Removed the SSL setting — local DB doesn't need it
   });
 
-const pool = new Pool({
-  user: 'cse340',
-  host: 'localhost', // Or your database host
-  database: 'your_database_name',
-  password: 'YOUR_INCORRECT_PASSWORD', // <--- CHECK THIS!
-  port: 5432, // Default PostgreSQL port
-});
-
-// ... rest of your database connection code
-
   // For debugging queries during development
   module.exports = {
     async query(text, params) {
