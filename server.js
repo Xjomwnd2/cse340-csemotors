@@ -49,7 +49,6 @@ module.exports = { buildLogin };
   }
 }));
 
-
 // Error.captureStackTrace
 // Error-handling middleware
 app.use((err, req, res, next) => {
