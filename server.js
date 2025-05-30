@@ -39,18 +39,13 @@ module.exports = { buildLogin };
     createTableIfMissing: true,
     pool,
   }),
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true,
-  name: 'sessionId',
-}));
-
-app.use(session({
-  secret: process.env.SESSION_SECRET || 'fallbackSecret123', // fallback helps during dev
+  secret: process.env.SESSION_SECRET || 'fallbackSecret123', // this avoids the crash
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
+  name: 'sessionId',
   cookie: {
-    secure: false, // only true if you're using HTTPS (Render in production could use true)
+    secure: false, // set true in production with HTTPS
+    maxAge: 1000 * 60 * 60 * 2 // 2 hours
   }
 }));
 
