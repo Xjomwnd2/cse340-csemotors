@@ -1,12 +1,21 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
+
 let pool;
 
 if (process.env.NODE_ENV === "development") {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     // Removed the SSL setting — local DB doesn't need it
+  });
+
+const pool = new Pool({
+    user: process.env.DB_USER || 'cse340',
+    host: process.env.DB_HOST || 'localhost',
+    database: process.env.DB_NAME || 'cse340m_obu5',
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT || 5432,
   });
 
   // For debugging queries during development
@@ -28,14 +37,6 @@ if (process.env.NODE_ENV === "development") {
     ssl: {
       rejectUnauthorized: false, // ✅ Use SSL only in production (like on Render or Heroku)
     },
-  });
-
-  const pool = new Pool({
-    user: process.env.DB_USER || 'cse340',
-    host: process.env.DB_HOST || 'localhost',
-    database: process.env.DB_NAME || 'cse340m_obu5',
-    password: process.env.DB_PASSWORD,
-    port: process.env.DB_PORT || 5432,
   });
 
   module.exports = pool;
