@@ -111,6 +111,20 @@ app.use(async (err, req, res, next) => {
   });
 });
 
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'fallbackSecret123', // fallback helps during dev
+  secret: process.env.SESSION_SECRET || 'fallbackSecret123', // this avoids the crashAdd commentMore actions
+  resave: false,
+  saveUninitialized: true,
+  saveUninitialized: false,
+  name: 'sessionId',
+  cookie: {
+    secure: false, // only true if you're using HTTPS (Render in production could use true)
+    secure: false, // set true in production with HTTPS
+    maxAge: 1000 * 60 * 60 * 2 // 2 hours
+  }
+}));
+
 /* ***********************
  * Log statement to confirm server operation
  *************************/
