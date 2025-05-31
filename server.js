@@ -20,7 +20,7 @@ const accountRoute = require("./routes/accountRoute");
 const pool = new Pool({
   user: process.env.DB_USER || 'cse340',
   host: process.env.DB_HOST || 'localhost',
-  database: process.env.DB_NAME || 'your_database_name',
+  database: process.env.DB_NAME || 'cse340m_obu5',
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT || 5432,
 });
