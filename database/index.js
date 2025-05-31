@@ -1,9 +1,14 @@
 const { Pool } = require("pg");
 require("dotenv").config();
 
+// Debug logging
+console.log("NODE_ENV:", process.env.NODE_ENV);
+console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL);
+console.log("DATABASE_URL starts with:", process.env.DATABASE_URL?.substring(0, 20));
+
 let pool;
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development" || !process.env.DATABASE_URL) {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     // Removed the SSL setting — local DB doesn't need it
