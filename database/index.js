@@ -8,13 +8,17 @@ console.log("DATABASE_URL starts with:", process.env.DATABASE_URL?.substring(0, 
 
 let pool;
 
-if (process.env.NODE_ENV === "development" || !process.env.DATABASE_URL) {
+if (process.env.NODE_ENV === "development") {
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     // Removed the SSL setting — local DB doesn't need it
   });
 } else {
   // Production configuration
+  if (!process.env.DATABASE_URL) {
+    throw new Error("DATABASE_URL environment variable is required for production");
+  }
+  
   pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: {
