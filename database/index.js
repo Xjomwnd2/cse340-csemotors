@@ -18,6 +18,7 @@ const pool = new Pool({
     port: process.env.DB_PORT || 5432,
   });
 
+
   // For debugging queries during development
   module.exports = {
     async query(text, params) {
