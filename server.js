@@ -112,6 +112,7 @@ app.use(async (err, req, res, next) => {
 });
 
 app.use(session({
+  secret: process.env.SESSION_SECRET || 'temporary-fallback-secret-key',
   secret: process.env.SESSION_SECRET || 'fallbackSecret123', // fallback helps during dev
   secret: process.env.SESSION_SECRET || 'fallbackSecret123', // this avoids the crashAdd commentMore actions
   resave: false,
