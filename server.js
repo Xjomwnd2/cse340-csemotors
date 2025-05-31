@@ -132,6 +132,9 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 2 // 2 hours
   }
 }));
+/*      */
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 /* ***********************
  * Log statement to confirm server operation
