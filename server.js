@@ -18,6 +18,8 @@ const pool = require('./database/');
 const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser");
 const { title } = require("process");
+const cookieParser = require("cookie-parser")
+
 
 
 /* ****************************************
@@ -50,6 +52,8 @@ module.exports = { buildLogin };
     maxAge: 1000 * 60 * 60 * 2 // 2 hours
   }
 }));
+
+app.use(cookieParser())
 
 // Error.captureStackTrace
 // Error-handling middleware
