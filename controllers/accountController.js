@@ -1,4 +1,6 @@
-const utilities = require("../utilities");  // Adjust path as needed
+const utilities = require("../utilities");
+const jwt = require("jsonwebtoken")
+ require("dotenv").config();  // Adjust path as needed
 
 async function buildRegister(req, res, next) {
   let nav = await utilities.getNav();
