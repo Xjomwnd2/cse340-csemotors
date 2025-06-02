@@ -17,6 +17,7 @@ const session = require("express-session");
 const pool = require('./database/');
 const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser");
+const { title } = require("process");
 
 
 /* ****************************************
@@ -79,6 +80,10 @@ app.set("layout", "./layouts/layout"); // not at views root
  *************************/
 // Static route
 app.use(express.static("public"));
+// Index route
+app.get("/", function(req, res){
+  res.render("index", {title:"Home"});
+});
 // Index route
 app.get("/", utilities.handleErrors(baseController.buildHome));
 // Inventory routes
