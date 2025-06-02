@@ -77,7 +77,7 @@ Util.handleErrors = fn => (req, res, next) => Promise.resolve(fn(req, res, next)
     req.flash("notice", "Please log in.")
     return res.redirect("/account/login")
   }
- }
+ };
 
 
 module.exports = Util;
