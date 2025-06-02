@@ -3,7 +3,9 @@ const express = require("express");
 const router = new express.Router();
 const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
-const { registrationRules } = require("../utilities/account-validation")
+const { registrationRules } = require("../utilities/account-validation");
+const regValidate = require('../utilities/account-validation'); // Adjust path if needed
+
 
 
 // Route to build "My Account" view
