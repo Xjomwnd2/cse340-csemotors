@@ -1,14 +1,11 @@
-  const utilities = require(".");
-  const { body, validationResult } = require("express-validator");
-  const accountModel = require("../models/account-model");
-  const validate = {};
-  
-  /*  **********************************
-  *  Registration Data Validation Rules
-  * ********************************* */
-  validate.registationRules = () => {
+const utilities = require(".");
+const { body, validationResult } = require("express-validator");
+const accountModel = require("../models/account-model");
+const validate = {};
+
+// Registration validation rules
+validate.registationRules = () => {
   return [
-    // firstname is required
     body("account_firstname")
       .trim()
       .escape()
@@ -16,7 +13,6 @@
       .isLength({ min: 1 })
       .withMessage("Please provide a first name."),
 
-    // lastname is required
     body("account_lastname")
       .trim()
       .escape()
@@ -24,20 +20,18 @@
       .isLength({ min: 2 })
       .withMessage("Please provide a last name."),
 
-    // valid email is required and cannot already exist in the database
     body("account_email")
       .trim()
       .isEmail()
-      .normalizeEmail() // refer to validator.js docs
+      .normalizeEmail()
       .withMessage("A valid email is required.")
       .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email)
-        if (emailExists){
-          throw new Error("Email exists. Please log in or use different email")
+        const emailExists = await accountModel.checkExistingEmail(account_email);
+        if (emailExists) {
+          throw new Error("Email exists. Please log in or use different email");
         }
       }),
 
-    // password rule
     body("account_password")
       .trim()
       .notEmpty()
@@ -49,6 +43,22 @@
         minSymbols: 1,
       })
       .withMessage("Password does not meet requirements."),
+  ];
+};
+
+// ✅ ADD THIS:
+validate.loginRules = () => {
+  return [
+    body("account_email")
+      .trim()
+      .isEmail()
+      .normalizeEmail()
+      .withMessage("A valid email is required."),
+
+    body("account_password")
+      .trim()
+      .notEmpty()
+      .withMessage("Password is required."),
   ];
 };
 
