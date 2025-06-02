@@ -21,7 +21,13 @@ router.get("/register", accountController.buildRegister);
 // Route to process the registration form submission
 router.post('/register', utilities.handleErrors(accountController.registerAccount));
 
-// Export the router
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+)
 
 // Process the login attempt
 router.post(
