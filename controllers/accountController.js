@@ -119,3 +119,10 @@ const accountController = {
 };
 
 module.exports = accountController;
+
+console.log("Exported accountController:", {
+  buildLogin,
+  buildRegister,
+  register: registerAccount,
+  login: accountLogin,
+});
