@@ -1,350 +1,59 @@
 <%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
 
-<div class="inventory-container">
-    <!-- Page Title and Navigation -->
-    <div class="inventory-header">
-        <h1><%= title %></h1>
-        <% if (locals.message) { %>
-            <div class="message <%= locals.message.type %>">
-                <%= locals.message.text %>
-            </div>
-        <% } %>
-    </div>
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { 
+  res.redirect('/')
+} %>
 
-    <!-- Vehicle Grid Display -->
-    <div class="vehicle-grid">
-        <% if (data && data.length > 0) { %>
-            <% data.forEach(function(vehicle) { %>
-                <div class="vehicle-card">
-                    <a href="/inv/detail/<%= vehicle.inv_id %>" class="vehicle-link">
-                        <div class="vehicle-image">
-                            <img src="<%= vehicle.inv_image %>" 
-                                 alt="<%= vehicle.inv_make %> <%= vehicle.inv_model %> on CSE Motors"
-                                 loading="lazy"
-                                 onerror="this.src='/images/vehicles/no-image.png'">
-                        </div>
-                        <div class="vehicle-info">
-                            <h3 class="vehicle-name">
-                                <%= vehicle.inv_make %> <%= vehicle.inv_model %>
-                            </h3>
-                            <div class="vehicle-year">
-                                <%= vehicle.inv_year %>
-                            </div>
-                            <div class="vehicle-price">
-                                $<%= Number(vehicle.inv_price).toLocaleString('en-US') %>
-                            </div>
-                            <div class="vehicle-mileage">
-                                <%= Number(vehicle.inv_miles).toLocaleString('en-US') %> miles
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            <% }); %>
-        <% } else { %>
-            <div class="no-vehicles">
-                <div class="no-vehicles-icon">🚗</div>
-                <h3>No Vehicles Found</h3>
-                <p>Sorry, we don't have any vehicles in this classification at the moment.</p>
-                <a href="/" class="back-home-btn">Browse All Vehicles</a>
-            </div>
-        <% } %>
-    </div>
+<% if (errors) { %>
+  <ul class="notice">
+    <% errors.array().forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>
 
-    <!-- Back to Classifications -->
-    <div class="navigation-footer">
-        <a href="/" class="back-link">← Back to All Classifications</a>
-    </div>
-</div>
+<form action="/inv/update" method="post">
+  <fieldset>
+    <legend>Vehicle Information</legend>
+    
+    <label for="classificationList">Classification:</label>
+    <%- classificationSelect %>
 
-<style>
-    .inventory-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <label for="inv_make">Make:</label>
+    <input type="text" id="inv_make" name="inv_make" value="<%= locals.inv_make %>" required>
 
-    .inventory-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
+    <label for="inv_model">Model:</label>
+    <input type="text" id="inv_model" name="inv_model" value="<%= locals.inv_model %>" required>
 
-    .inventory-header h1 {
-        color: #333;
-        font-size: 2.5em;
-        margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    }
+    <label for="inv_year">Year:</label>
+    <input type="number" id="inv_year" name="inv_year" min="1900" max="2030" value="<%= locals.inv_year %>" required>
 
-    .message {
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 20px;
-        font-weight: 500;
-    }
+    <label for="inv_description">Description:</label>
+    <textarea id="inv_description" name="inv_description" rows="4" required><%= locals.inv_description %></textarea>
 
-    .message.success {
-        background-color: #d4edda;
-        color: #155724;
-        border: 1px solid #c3e6cb;
-    }
+    <label for="inv_image">Image Path:</label>
+    <input type="text" id="inv_image" name="inv_image" value="<%= locals.inv_image %>" required>
 
-    .message.error {
-        background-color: #f8d7da;
-        color: #721c24;
-        border: 1px solid #f5c6cb;
-    }
+    <label for="inv_thumbnail">Thumbnail Path:</label>
+    <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="<%= locals.inv_thumbnail %>" required>
 
-    .message.notice {
-        background-color: #d1ecf1;
-        color: #0c5460;
-        border: 1px solid #b8daff;
-    }
+    <label for="inv_price">Price:</label>
+    <input type="number" id="inv_price" name="inv_price" min="0" step="0.01" value="<%= locals.inv_price %>" required>
 
-    .vehicle-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
-    }
+    <label for="inv_miles">Miles:</label>
+    <input type="number" id="inv_miles" name="inv_miles" min="0" value="<%= locals.inv_miles %>" required>
 
-    .vehicle-card {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-    }
+    <label for="inv_color">Color:</label>
+    <input type="text" id="inv_color" name="inv_color" value="<%= locals.inv_color %>" required>
 
-    .vehicle-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-        border-color: #667eea;
-    }
+    <!-- Hidden field to pass the inventory ID -->
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+  </fieldset>
 
-    .vehicle-link {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-        height: 100%;
-    }
-
-    .vehicle-image {
-        position: relative;
-        height: 200px;
-        overflow: hidden;
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    }
-
-    .vehicle-image img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.3s ease;
-    }
-
-    .vehicle-card:hover .vehicle-image img {
-        transform: scale(1.05);
-    }
-
-    .vehicle-info {
-        padding: 20px;
-    }
-
-    .vehicle-name {
-        font-size: 1.3em;
-        font-weight: 700;
-        color: #333;
-        margin-bottom: 10px;
-        line-height: 1.2;
-    }
-
-    .vehicle-year {
-        color: #666;
-        font-size: 0.95em;
-        margin-bottom: 8px;
-        font-weight: 500;
-    }
-
-    .vehicle-price {
-        font-size: 1.4em;
-        font-weight: 700;
-        color: #667eea;
-        margin-bottom: 8px;
-    }
-
-    .vehicle-mileage {
-        color: #888;
-        font-size: 0.9em;
-        font-weight: 500;
-    }
-
-    .no-vehicles {
-        grid-column: 1 / -1;
-        text-align: center;
-        padding: 60px 20px;
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .no-vehicles-icon {
-        font-size: 4em;
-        margin-bottom: 20px;
-        opacity: 0.6;
-    }
-
-    .no-vehicles h3 {
-        color: #333;
-        font-size: 1.8em;
-        margin-bottom: 15px;
-    }
-
-    .no-vehicles p {
-        color: #666;
-        font-size: 1.1em;
-        margin-bottom: 25px;
-        line-height: 1.6;
-    }
-
-    .back-home-btn {
-        display: inline-block;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        text-decoration: none;
-        padding: 12px 25px;
-        border-radius: 25px;
-        font-weight: 600;
-        transition: all 0.3s ease;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-    }
-
-    .back-home-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
-
-    .navigation-footer {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 2px solid #e9ecef;
-    }
-
-    .back-link {
-        color: #667eea;
-        text-decoration: none;
-        font-weight: 600;
-        font-size: 1.1em;
-        transition: all 0.3s ease;
-        display: inline-flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    .back-link:hover {
-        color: #5a6fd8;
-        transform: translateX(-3px);
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .inventory-container {
-            padding: 15px;
-        }
-
-        .inventory-header h1 {
-            font-size: 2em;
-        }
-
-        .vehicle-grid {
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-
-        .vehicle-card {
-            margin: 0 auto;
-            max-width: 400px;
-        }
-
-        .vehicle-image {
-            height: 180px;
-        }
-
-        .vehicle-info {
-            padding: 15px;
-        }
-
-        .vehicle-name {
-            font-size: 1.2em;
-        }
-
-        .vehicle-price {
-            font-size: 1.3em;
-        }
-
-        .no-vehicles {
-            padding: 40px 15px;
-        }
-
-        .no-vehicles-icon {
-            font-size: 3em;
-        }
-
-        .no-vehicles h3 {
-            font-size: 1.5em;
-        }
-    }
-
-    @media (max-width: 480px) {
-        .inventory-header h1 {
-            font-size: 1.8em;
-        }
-
-        .vehicle-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .vehicle-image {
-            height: 160px;
-        }
-
-        .vehicle-info {
-            padding: 12px;
-        }
-
-        .vehicle-name {
-            font-size: 1.1em;
-        }
-
-        .vehicle-price {
-            font-size: 1.2em;
-        }
-    }
-
-    /* Loading Animation */
-    @keyframes fadeIn {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .vehicle-card {
-        animation: fadeIn 0.6s ease forwards;
-    }
-
-    .vehicle-card:nth-child(1) { animation-delay: 0.1s; }
-    .vehicle-card:nth-child(2) { animation-delay: 0.2s; }
-    .vehicle-card:nth-child(3) { animation-delay: 0.3s; }
-    .vehicle-card:nth-child(4) { animation-delay: 0.4s; }
-    .vehicle-card:nth-child(5) { animation-delay: 0.5s; }
-    .vehicle-card:nth-child(6) { animation-delay: 0.6s; }
-</style>
+  <input type="submit" name="submit" value="Update Vehicle">
+</form>
 
 <%- include('../partials/footer') %>
