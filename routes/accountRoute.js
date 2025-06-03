@@ -40,18 +40,3 @@ router.post(
 )
 
 module.exports = router;
-
-const accountController = {};
-
-// Controller function for login
-accountController.accountLogin = async (req, res) => {
-  try {
-    // For now, just to test if it works
-    res.send("Login controller is working!");
-  } catch (error) {
-    console.error("Login error:", error);
-    res.status(500).send("Internal Server Error");
-  }
-};
-
-module.exports = accountController;
