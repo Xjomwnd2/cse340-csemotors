@@ -3,7 +3,6 @@ const express = require("express");
 const router = new express.Router();
 const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
-console.log(accountController);
 const regValidate = require('../utilities/account-validation'); // Adjust path if needed
 
 // Route to build "My Account" view (make sure buildAccount exists in your controller)
