@@ -66,14 +66,17 @@ app.set("layout", "./layouts/layout");
 /* ***********************
  * Routes
  *************************/
+// Public route
 app.use(express.static("public"));
+
 //Index route
 app.get("/", baseController.buildHome);
-// Home route — no need to pass nav explicitly now
-app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Inventory routes
 app.use("/inv", inventoryRoute);
+
+// Home route — no need to pass nav explicitly now
+app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Account routes
 app.use("/account", accountRoute);
