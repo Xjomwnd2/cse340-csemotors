@@ -1,17 +1,14 @@
-// Needed Resources
 const express = require("express");
 const router = new express.Router();
+const accountController = require("../controllers/accountController"); // Adjust path as needed
 const utilities = require("../utilities");
-const accountController = require("../controllers/accountController");
-const regValidate = require('../utilities/account-validation'); // Adjust path if needed
+const regValidate = require('../utilities/account-validation');
 
-
-// Route to build "My Account" view (make sure buildAccount exists in your controller)
-// If you don't have it yet, comment this out or implement it!
-router.get(
-  "/", 
-  utilities.handleErrors(accountController.buildAccount) // <-- Only if this exists!
-);
+// Route to build "My Account" view - COMMENTED OUT until you implement buildAccount
+// router.get(
+//   "/", 
+//   utilities.handleErrors(accountController.buildAccount) // <-- Only if this exists!
+// );
 
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));

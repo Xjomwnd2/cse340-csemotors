@@ -17,6 +17,18 @@ async function buildRegister(req, res, next) {
 }
 
 /* ****************************************
+ *  Build Account Management View
+ * *************************************** */
+async function buildAccount(req, res, next) {
+  let nav = await utilities.getNav();
+  res.render("account/account-management", {
+    title: "Account Management",
+    nav,
+    errors: null,
+  });
+}
+
+/* ****************************************
  *  Build Login View
  * *************************************** */
 async function buildLogin(req, res, next) {
@@ -130,6 +142,7 @@ async function accountLogin(req, res) {
 
 // Export the controller functions
 module.exports = {
+  buildAccount,
   buildLogin,
   buildRegister,
   register: registerAccount,
