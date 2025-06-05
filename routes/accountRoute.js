@@ -1,13 +1,22 @@
+// Needed Resources
 const express = require("express");
 const router = new express.Router();
-const accountController = require("../controllers/accountController"); // Adjust path as needed
 const utilities = require("../utilities");
-const regValidate = require('../utilities/account-validation');
+const accountController = require("../controllers/accountController");
+
+// Only require validation if the file exists
+let regValidate;
+try {
+  regValidate = require('../utilities/account-validation');
+} catch (error) {
+  console.log("Validation middleware not found - proceeding without validation");
+  regValidate = null;
+}
 
 // Route to build "My Account" view - COMMENTED OUT until you implement buildAccount
 // router.get(
 //   "/", 
-//   utilities.handleErrors(accountController.buildAccount) // <-- Only if this exists!
+//   utilities.handleErrors(accountController.buildAccount)
 // );
 
 // Route to build login view
@@ -19,12 +28,18 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Route to process the registration form submission
 router.post('/register', utilities.handleErrors(accountController.register));
 
-// Process the login request with validation middleware
-router.post(
-  "/login",
-  regValidate.loginRules(),
-  regValidate.checkLoginData,
-  utilities.handleErrors(accountController.login)
-);
+// Process the login request - with or without validation
+if (regValidate && regValidate.loginRules && regValidate.checkLoginData) {
+  // With validation middleware
+  router.post(
+    "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(accountController.login)
+  );
+} else {
+  // Without validation middleware (temporary solution)
+  router.post("/login", utilities.handleErrors(accountController.login));
+}
 
 module.exports = router;
