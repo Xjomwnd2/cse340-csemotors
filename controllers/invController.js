@@ -64,7 +64,8 @@ invCont.getInventoryJSON = async (req, res, next) => {
 };
 
 /* ***************************
- *  Update Inventory Data ?**?
+ *  Update Inventory Data ?
+**?
  * ************************** */
 invCont.updateInventory = async function (req, res, next) {
   let nav = await utilities.getNav()
