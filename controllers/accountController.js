@@ -160,3 +160,14 @@ module.exports = {
   register: registerAccount,
   login: accountLogin,
 };
+
+/* ****************************************
+*  Deliver accounts view
+* *************************************** */
+exports.buildRegister = (req, res) => {
+  res.render('account/register', {
+    title: 'Register',
+    errors: null,
+    message: null
+  });
+};
