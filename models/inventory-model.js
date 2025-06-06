@@ -35,12 +35,25 @@ async function getInventoryByClassificationId(classification_id) {
 async function checkExistingEmail(account_email){
   try {
     const sql = "SELECT * FROM account WHERE account_email = $1"
-    const email = await pool.query(sql, [account_email])
+    const email = await pool.query(sql, [account_email]);
     return email.rowCount
   } catch (error) {
-    return error.message
+    return error.message;
+  }
+};
+
+/* ***********************************************************
+* Delete Inventory Item
+* Unit 5, Delete Activity
+*********************************************************** */
+async function deleteInventoryItem(inv_id) {
+  try {
+    const sql = "DELETE FROM inventory WHERE inv_id = $1"
+    const data = await pool.query(sql, [inv_id])
+    return data
+  } catch (error) {
+  new Error("Delete Inventory Error")
   }
 }
-
 // Export the functions so they can be used elsewhere
-module.exports = {getClassifications, getInventoryByClassificationId, checkExistingEmail};
+module.exports = {getClassifications, getInventoryByClassificationId, checkExistingEmail, deleteInventoryItem };
