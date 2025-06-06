@@ -7,6 +7,9 @@ const utilities = require("../utilities/index");
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
 
+// Route to delete
+router.get("/delete/:inv_id", invController.buildDeleteView);
+
 // Route to post inventory by classification view
 router.post("/update/", invController.updateInventory);
 
