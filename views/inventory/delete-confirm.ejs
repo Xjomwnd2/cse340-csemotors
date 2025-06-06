@@ -1,0 +1,66 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { 
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+  </ul>
+<% } %>
+
+<p><strong>Notice:</strong> Deleting this item is permanent and cannot be undone.</p>
+
+<form action="/inv/delete" method="post">
+  <fieldset>
+    <legend>Vehicle Information</legend>
+    
+    <label for="inv_make">Make:</label>
+    <input name="inv_make" id="inv_make" type="text" value="<%= locals.inv_make %>" readonly>
+    
+    <label for="inv_model">Model:</label>
+    <input name="inv_model" id="inv_model" type="text" value="<%= locals.inv_model %>" readonly>
+    
+    <label for="inv_year">Year:</label>
+    <input name="inv_year" id="inv_year" type="text" value="<%= locals.inv_year %>" readonly>
+    
+    <label for="inv_description">Description:</label>
+    <textarea name="inv_description" id="inv_description" readonly><%= locals.inv_description %></textarea>
+    
+    <label for="inv_image">Image Path:</label>
+    <input name="inv_image" id="inv_image" type="text" value="<%= locals.inv_image %>" readonly>
+    
+    <label for="inv_thumbnail">Thumbnail Path:</label>
+    <input name="inv_thumbnail" id="inv_thumbnail" type="text" value="<%= locals.inv_thumbnail %>" readonly>
+    
+    <label for="inv_price">Price:</label>
+    <input name="inv_price" id="inv_price" type="text" value="<%= locals.inv_price %>" readonly>
+    
+    <label for="inv_miles">Miles:</label>
+    <input name="inv_miles" id="inv_miles" type="text" value="<%= locals.inv_miles %>" readonly>
+    
+    <label for="inv_color">Color:</label>
+    <input name="inv_color" id="inv_color" type="text" value="<%= locals.inv_color %>" readonly>
+    
+    <label for="classification_id">Classification:</label>
+    <select name="classification_id" id="classification_id" disabled>
+      <%- classificationSelect %>
+    </select>
+    
+    <!-- Hidden field to pass inv_id -->
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+    
+    <input type="submit" name="submit" id="deleteBtn" value="Delete Vehicle">
+    <a href="/inv/" id="cancelLink">Cancel</a>
+  </fieldset>
+</form>
+
+<%- include('../partials/footer') %>
