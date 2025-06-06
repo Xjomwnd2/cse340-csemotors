@@ -25,6 +25,9 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 // Route to deliver the registration view
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
+// Display the registration form
+router.get('/register', accountController.buildRegister);
+
 // Route to process the registration form submission
 router.post('/register', utilities.handleErrors(accountController.register));
 
