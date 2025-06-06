@@ -29,14 +29,6 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Route to process the registration form submission
 router.post('/register', utilities.handleErrors(accountController.register));
 
-// Process the registration data
-router.post(
-  "/register",
-  regValidate.registationRules(),
-  regValidate.checkRegData,
-  utilities.handleErrors(accountController.registerAccount)
-)
-
 // Process the login request - with or without validation
 if (regValidate && regValidate.loginRules && regValidate.checkLoginData) {
   // With validation middleware
