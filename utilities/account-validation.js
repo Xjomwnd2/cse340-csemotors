@@ -80,14 +80,14 @@ validate.checkUpdateData = async (req, res, next) => {
     inv_miles, 
     inv_color,
     inv_id 
-  } = req.body
+  } = req.body;
   
   let errors = []
-  errors = validationResult(req)
+  errors = validationResult(req);
   
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav()
-    const classificationSelect = await utilities.buildClassificationList(classification_id)
+    let nav = await utilities.getNav();
+    const classificationSelect = await utilities.buildClassificationList(classification_id);
     const itemName = `${inv_make} ${inv_model}`
     res.render("inventory/edit-inventory", {
       errors,
@@ -106,10 +106,10 @@ validate.checkUpdateData = async (req, res, next) => {
       inv_color,
       inv_id
     })
-    return
+    return;
   }
-  next()
-}
+  next();
+};
 
 /* ******************************
  * Check data and return errors or continue to registration
@@ -117,7 +117,7 @@ validate.checkUpdateData = async (req, res, next) => {
 validate.checkRegData = async (req, res, next) => {
   const { account_firstname, account_lastname, account_email } = req.body
   let errors = []
-  errors = validationResult(req)
+  errors = validationResult(req);
   if (!errors.isEmpty()) {
     let nav = await utilities.getNav()
     res.render("account/register", {
@@ -128,9 +128,9 @@ validate.checkRegData = async (req, res, next) => {
       account_lastname,
       account_email,
     })
-    return
+    return;
   }
-  next()
+  next();
 }
 
-module.exports = validate
+module.exports = validate;
