@@ -3,6 +3,8 @@ const express = require("express");
 const router = new express.Router(); 
 const invController = require("../controllers/invController");
 const utilities = require("../utilities/index");
+const { buildDeleteView } = require("../controllers/invController");
+
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
@@ -40,23 +42,23 @@ router.post("/delete", utilities.handleErrors(async (req, res, next) => {
 // Route to display delete confirmation view
 router.get("/delete/:inv_id", async (req, res, next) => {
   try {
-    const inv_id = parseInt(req.params.inv_id)
+    const inv_id = parseInt(req.params.inv_id);
     
     // Call controller function to handle delete confirmation view
-    await invController.buildDeleteView(req, res, next)
+    await invController.buildDeleteView(req, res, next);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 // Route to process the delete request
 router.post("/delete", async (req, res, next) => {
   try {
     // Call controller function to handle the actual deletion
-    await invController.deleteInventoryItem(req, res, next)
+    await invController.deleteInventoryItem(req, res, next);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
 module.exports = router;
