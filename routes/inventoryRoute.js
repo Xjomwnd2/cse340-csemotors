@@ -9,4 +9,28 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 // Route to post inventory by classification view
 router.post("/update/", invController.updateInventory);
 
+// Existing routes would be here...
+
+// Route to display delete confirmation view
+router.get("/delete/:inv_id", utilities.handleErrors(async (req, res, next) => {
+  try {
+    const inv_id = parseInt(req.params.inv_id);
+    
+    // Call controller function to handle delete confirmation view
+    await invController.buildDeleteView(req, res, next);
+  } catch (error) {
+    next(error);
+  }
+}));
+
+// Route to process the delete request
+router.post("/delete", utilities.handleErrors(async (req, res, next) => {
+  try {
+    // Call controller function to handle the actual deletion
+    await invController.deleteInventoryItem(req, res, next);
+  } catch (error) {
+    next(error);
+  }
+}));
+
 module.exports = router;
