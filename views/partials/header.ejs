@@ -1,26 +1,8 @@
-<header>
-        <div class="siteName">
-            <a href="/" title="Return to home page">CSE Motors</a>
-        </div>
-        
-        <nav>
-            <!-- Standard navigation links -->
-            <ul class="nav-list">
-                <li><a href="/" title="Home page">Home</a></li>
-                <li><a href="/inv" title="Our Inventory">Inventory</a></li>
-                <li><a href="/about" title="About Us">About</a></li>
-                <li><a href="/contact" title="Contact Us">Contact</a></li>
-                
-                <!-- Authentication-dependent navigation -->
-                <% if (locals.loggedin) { %>
-                    <!-- Show when user is logged in -->
-                    <li><a href="/account/" title="Account Management">Welcome <%= locals.accountData.account_firstname %></a></li>
-                    <li><a href="/account/logout" title="Logout">Logout</a></li>
-                <% } else { %>
-                    <!-- Show when user is not logged in -->
-                    <li><a href="/account/login" title="Click to log in">My Account</a></li>
-                <% } %>
-            </ul>
-        </nav>
-    </header>
-
+<header id="top-header">
+    <span class="siteName">
+      <a href="/" title="Return to home page">New Motors</a>
+    </span>
+    <div id="tools">
+      <a title="Click to log in" href="/account/login">My Account</a>
+    </div>
+  </header>
