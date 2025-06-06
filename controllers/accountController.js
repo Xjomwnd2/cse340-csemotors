@@ -4,6 +4,60 @@ const bcrypt = require("bcrypt");
 const accountModel = require("../models/account-model");
 require("dotenv").config();
 
+
+// Login handler
+const accountLogin = async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Step 1: Get account from DB by email
+    const accountData = await accountModel.getAccountByEmail(email);
+
+    if (!accountData) {
+      // If no account found, return login view with error
+      return res.status(400).render("account/login", {
+        title: "Login",
+        message: "No account found for that email.",
+        errors: null,
+        email,
+      });
+    }
+
+    // Step 2: Compare password with hashed password in DB
+    const match = await bcrypt.compare(password, accountData.account_password);
+
+    if (!match) {
+      // If password doesn't match
+      return res.status(401).render("account/login", {
+        title: "Login",
+        message: "Incorrect password. Please try again.",
+        errors: null,
+        email,
+      });
+    }
+
+    // Step 3: Login success — store user in session
+    req.session.account = {
+      id: accountData.account_id,
+      name: `${accountData.account_firstname} ${accountData.account_lastname}`,
+      email: accountData.account_email,
+      type: accountData.account_type,
+    };
+
+    // Step 4: Redirect to account management/dashboard page
+    return res.redirect("/account/");
+  } catch (error) {
+    console.error("Login error:", error);
+    return res.status(500).render("account/login", {
+      title: "Login",
+      message: "An error occurred during login. Please try again later.",
+      errors: null,
+      email,
+    });
+  }
+};
+/* ************************* END OF THE HANDLER ************* */
+
 /* ****************************************
  *  Build Register View
  * *************************************** */
@@ -154,6 +208,7 @@ async function accountLogin(req, res) {
 
 // Export the controller functions
 module.exports = {
+  accountLogin,
   buildAccount,
   buildLogin,
   buildRegister,
