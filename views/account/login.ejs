@@ -1,0 +1,36 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { 
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+  </ul>
+<% } %>
+
+<form action="/account/login" method="post">
+  <fieldset>
+    <legend>Account Login</legend>
+    
+    <label for="account_email">Email Address:</label>
+    <input name="account_email" id="account_email" type="email" value="<%= locals.account_email || '' %>" required>
+    
+    <label for="account_password">Password:</label>
+    <input name="account_password" id="account_password" type="password" required>
+    
+    <input type="submit" value="Sign In">
+    
+    <p>No account? <a href="/account/register">Sign-up</a></p>
+  </fieldset>
+</form>
+
+<%- include('../partials/footer') %>
