@@ -1,10 +1,127 @@
-<!-- PLACEHOLDER-->>
-<form action="/inv/classification/add" method="post">
-  <label for="classificationName">Classification Name:</label><br>
-  <input type="text" id="classificationName" name="classificationName" required><br><br>
+// ============================================================================
+// ADD CLASSIFICATION VIEW (views/inventory/add-classification.ejs)
+// ============================================================================
 
-  <input type="submit" value="Add Classification">
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <h1>Add New Classification</h1>
+<% } %>
 
-  <!-- Optional: Include a hidden input to identify the action (if using action-based routing in PHP) -->
-  <input type="hidden" name="action" value="add-classification">
+<!-- Display Flash Messages -->
+<% if (locals.messages) { %>
+    <ul class="notice">
+        <% locals.messages.forEach(message => { %>
+            <li><%= message %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<!-- Display Validation Errors -->
+<% if (locals.errors) { %>
+    <ul class="notice error">
+        <% locals.errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
+<form id="addClassificationForm" action="/inv/add-classification" method="post">
+    <fieldset>
+        <legend>Add New Classification</legend>
+        
+        <p class="form-instructions">
+            <strong>Important:</strong> The classification name cannot contain spaces or special characters. 
+            Only letters and numbers are allowed.
+        </p>
+        
+        <label for="classification_name">Classification Name:</label>
+        <input 
+            type="text" 
+            id="classification_name" 
+            name="classification_name" 
+            value="<%= locals.classification_name || '' %>"
+            pattern="^[A-Za-z0-9]+$"
+            title="Only letters and numbers are allowed - no spaces or special characters"
+            maxlength="30"
+            required
+        >
+        <small class="field-help">Enter a name using only letters and numbers (e.g., "SportsCars", "Trucks", "Motorcycles")</small>
+        
+        <input type="submit" value="Add Classification">
+    </fieldset>
 </form>
+
+<a href="/inv" class="back-link">← Back to Inventory Management</a>
+
+<script>
+// Client-side validation
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('addClassificationForm');
+    const input = document.getElementById('classification_name');
+    
+    // Real-time validation feedback
+    input.addEventListener('input', function() {
+        const value = this.value;
+        const isValid = /^[A-Za-z0-9]*$/.test(value);
+        
+        if (!isValid && value.length > 0) {
+            this.style.borderColor = '#dc3545';
+            this.style.backgroundColor = '#ffe6e6';
+            showValidationMessage('Only letters and numbers allowed - no spaces or special characters');
+        } else {
+            this.style.borderColor = '#28a745';
+            this.style.backgroundColor = '#e6ffe6';
+            hideValidationMessage();
+        }
+    });
+    
+    // Form submission validation
+    form.addEventListener('submit', function(e) {
+        const classificationName = input.value.trim();
+        
+        // Check if empty
+        if (!classificationName) {
+            e.preventDefault();
+            showError('Classification name is required.');
+            return false;
+        }
+        
+        // Check for invalid characters
+        if (!/^[A-Za-z0-9]+$/.test(classificationName)) {
+            e.preventDefault();
+            showError('Classification name can only contain letters and numbers - no spaces or special characters.');
+            return false;
+        }
+        
+        // Check minimum length
+        if (classificationName.length < 2) {
+            e.preventDefault();
+            showError('Classification name must be at least 2 characters long.');
+            return false;
+        }
+        
+        return true;
+    });
+    
+    function showValidationMessage(message) {
+        hideValidationMessage(); // Remove existing message
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'validation-message error';
+        messageDiv.textContent = message;
+        input.parentNode.insertBefore(messageDiv, input.nextSibling);
+    }
+    
+    function hideValidationMessage() {
+        const existing = document.querySelector('.validation-message');
+        if (existing) {
+            existing.remove();
+        }
+    }
+    
+    function showError(message) {
+        alert(message);
+        input.focus();
+    }
+});
+</script>
