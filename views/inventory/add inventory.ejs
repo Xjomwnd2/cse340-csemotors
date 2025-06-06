@@ -1,64 +1,358 @@
-<%- include('../partials/header') %>
-<%- include('../partials/navigation') %>
-
+<!-- views/inventory/add-inventory.ejs -->
 <% if (title) { %>
   <h1><%= title %></h1>
-<% } else { 
-  res.redirect('/')
-} %>
-
-<% if (errors) { %>
-  <ul class="notice">
-    <% errors.array().forEach(error => { %>
-      <li><%= error.msg %></li>
-    <% }) %>
-  </ul>
+<% } else { %>
+  <h1>Add New Vehicle</h1>
 <% } %>
 
-<form action="/inv/update" method="post">
+<!-- Flash Messages -->
+<% if (messages.notice) { %>
+  <div class="notice"><%= messages.notice %></div>
+<% } %>
+
+<% if (messages.error) { %>
+  <div class="error"><%= messages.error %></div>
+<% } %>
+
+<!-- Display Server-side Errors -->
+<% if (typeof errors !== 'undefined' && errors) { %>
+  <div class="error-list">
+    <h3>Please correct the following errors:</h3>
+    <ul>
+      <% errors.forEach(function(error) { %>
+        <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<form id="addInventoryForm" action="/inv/add-inventory" method="post">
   <fieldset>
     <legend>Vehicle Information</legend>
     
+    <!-- Classification Dropdown -->
     <label for="classificationList">Classification:</label>
-    <%- classificationSelect %>
-
+    <%- classificationList %>
+    
+    <!-- Vehicle Make -->
     <label for="inv_make">Make:</label>
-    <input type="text" id="inv_make" name="inv_make" value="<%= locals.inv_make %>" required>
-
+    <input type="text" 
+           id="inv_make" 
+           name="inv_make" 
+           value="<%= locals.inv_make || '' %>" 
+           required 
+           pattern="[A-Za-z\s]+" 
+           title="Make should only contain letters and spaces"
+           maxlength="30">
+    <span class="error" id="makeError"></span>
+    
+    <!-- Vehicle Model -->
     <label for="inv_model">Model:</label>
-    <input type="text" id="inv_model" name="inv_model" value="<%= locals.inv_model %>" required>
-
+    <input type="text" 
+           id="inv_model" 
+           name="inv_model" 
+           value="<%= locals.inv_model || '' %>" 
+           required 
+           pattern="[A-Za-z0-9\s\-]+" 
+           title="Model should contain letters, numbers, spaces, and hyphens only"
+           maxlength="30">
+    <span class="error" id="modelError"></span>
+    
+    <!-- Vehicle Year -->
     <label for="inv_year">Year:</label>
-    <input type="number" id="inv_year" name="inv_year" min="1900" max="2030" value="<%= locals.inv_year %>" required>
-
+    <input type="number" 
+           id="inv_year" 
+           name="inv_year" 
+           value="<%= locals.inv_year || '' %>" 
+           required 
+           min="1900" 
+           max="<%= new Date().getFullYear() + 1 %>"
+           title="Please enter a valid year">
+    <span class="error" id="yearError"></span>
+    
+    <!-- Vehicle Description -->
     <label for="inv_description">Description:</label>
-    <textarea id="inv_description" name="inv_description" rows="4" required><%= locals.inv_description %></textarea>
-
+    <textarea id="inv_description" 
+              name="inv_description" 
+              required 
+              minlength="10"
+              maxlength="500"
+              rows="4"
+              placeholder="Provide a detailed description of the vehicle..."><%= locals.inv_description || '' %></textarea>
+    <span class="error" id="descriptionError"></span>
+    
+    <!-- Vehicle Image Path -->
     <label for="inv_image">Image Path:</label>
-    <input type="text" id="inv_image" name="inv_image" value="<%= locals.inv_image %>" required>
-
+    <input type="text" 
+           id="inv_image" 
+           name="inv_image" 
+           value="<%= locals.inv_image || '/images/vehicles/no-image.png' %>" 
+           required
+           pattern="^/images/vehicles/.*\.(jpg|jpeg|png|gif|webp)$"
+           title="Image path must start with /images/vehicles/ and end with a valid image extension">
+    <span class="error" id="imageError"></span>
+    
+    <!-- Vehicle Thumbnail Path -->
     <label for="inv_thumbnail">Thumbnail Path:</label>
-    <input type="text" id="inv_thumbnail" name="inv_thumbnail" value="<%= locals.inv_thumbnail %>" required>
-
+    <input type="text" 
+           id="inv_thumbnail" 
+           name="inv_thumbnail" 
+           value="<%= locals.inv_thumbnail || '/images/vehicles/no-image-tn.png' %>" 
+           required
+           pattern="^/images/vehicles/.*\.(jpg|jpeg|png|gif|webp)$"
+           title="Thumbnail path must start with /images/vehicles/ and end with a valid image extension">
+    <span class="error" id="thumbnailError"></span>
+    
+    <!-- Vehicle Price -->
     <label for="inv_price">Price:</label>
-    <input type="number" id="inv_price" name="inv_price" min="0" step="0.01" value="<%= locals.inv_price %>" required>
-
+    <input type="number" 
+           id="inv_price" 
+           name="inv_price" 
+           value="<%= locals.inv_price || '' %>" 
+           required 
+           min="0" 
+           step="0.01"
+           title="Please enter a valid price">
+    <span class="error" id="priceError"></span>
+    
+    <!-- Vehicle Miles -->
     <label for="inv_miles">Miles:</label>
-    <input type="number" id="inv_miles" name="inv_miles" min="0" value="<%= locals.inv_miles %>" required>
-
+    <input type="number" 
+           id="inv_miles" 
+           name="inv_miles" 
+           value="<%= locals.inv_miles || '' %>" 
+           required 
+           min="0"
+           title="Please enter valid mileage">
+    <span class="error" id="milesError"></span>
+    
+    <!-- Vehicle Color -->
     <label for="inv_color">Color:</label>
-    <input type="text" id="inv_color" name="inv_color" value="<%= locals.inv_color %>" required>
-
-    <!-- Hidden field to pass the inventory ID -->
-    <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+    <input type="text" 
+           id="inv_color" 
+           name="inv_color" 
+           value="<%= locals.inv_color || '' %>" 
+           required 
+           pattern="[A-Za-z\s]+" 
+           title="Color should only contain letters and spaces"
+           maxlength="20">
+    <span class="error" id="colorError"></span>
+    
+    <input type="submit" value="Add Vehicle" class="submit-btn">
   </fieldset>
-
-  <input type="submit" name="submit" value="Update Vehicle">
-
-<input type="hidden" name="inv_id"
-<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
-<% } %>>
-
 </form>
 
-<%- include('../partials/footer') %>
+<style>
+/* Basic styling for the form */
+#addInventoryForm {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+legend {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+select,
+textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.submit-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.submit-btn:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
+
+.error-list {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.notice {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.error {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+</style>
+
+<script>
+// Client-side validation
+document.getElementById('addInventoryForm').addEventListener('submit', function(e) {
+  let isValid = true;
+  
+  // Clear previous error messages
+  const errorSpans = document.querySelectorAll('.error');
+  errorSpans.forEach(span => span.textContent = '');
+  
+  // Validate Make
+  const make = document.getElementById('inv_make').value.trim();
+  if (!make) {
+    document.getElementById('makeError').textContent = 'Make is required';
+    isValid = false;
+  } else if (!/^[A-Za-z\s]+$/.test(make)) {
+    document.getElementById('makeError').textContent = 'Make should only contain letters and spaces';
+    isValid = false;
+  }
+  
+  // Validate Model
+  const model = document.getElementById('inv_model').value.trim();
+  if (!model) {
+    document.getElementById('modelError').textContent = 'Model is required';
+    isValid = false;
+  } else if (!/^[A-Za-z0-9\s\-]+$/.test(model)) {
+    document.getElementById('modelError').textContent = 'Model should contain letters, numbers, spaces, and hyphens only';
+    isValid = false;
+  }
+  
+  // Validate Year
+  const year = document.getElementById('inv_year').value;
+  const currentYear = new Date().getFullYear();
+  if (!year) {
+    document.getElementById('yearError').textContent = 'Year is required';
+    isValid = false;
+  } else if (year < 1900 || year > currentYear + 1) {
+    document.getElementById('yearError').textContent = `Year must be between 1900 and ${currentYear + 1}`;
+    isValid = false;
+  }
+  
+  // Validate Description
+  const description = document.getElementById('inv_description').value.trim();
+  if (!description) {
+    document.getElementById('descriptionError').textContent = 'Description is required';
+    isValid = false;
+  } else if (description.length < 10) {
+    document.getElementById('descriptionError').textContent = 'Description must be at least 10 characters long';
+    isValid = false;
+  }
+  
+  // Validate Image Path
+  const image = document.getElementById('inv_image').value.trim();
+  if (!image) {
+    document.getElementById('imageError').textContent = 'Image path is required';
+    isValid = false;
+  } else if (!/^\/images\/vehicles\/.*\.(jpg|jpeg|png|gif|webp)$/i.test(image)) {
+    document.getElementById('imageError').textContent = 'Image path must start with /images/vehicles/ and end with a valid image extension';
+    isValid = false;
+  }
+  
+  // Validate Thumbnail Path
+  const thumbnail = document.getElementById('inv_thumbnail').value.trim();
+  if (!thumbnail) {
+    document.getElementById('thumbnailError').textContent = 'Thumbnail path is required';
+    isValid = false;
+  } else if (!/^\/images\/vehicles\/.*\.(jpg|jpeg|png|gif|webp)$/i.test(thumbnail)) {
+    document.getElementById('thumbnailError').textContent = 'Thumbnail path must start with /images/vehicles/ and end with a valid image extension';
+    isValid = false;
+  }
+  
+  // Validate Price
+  const price = document.getElementById('inv_price').value;
+  if (!price) {
+    document.getElementById('priceError').textContent = 'Price is required';
+    isValid = false;
+  } else if (price < 0) {
+    document.getElementById('priceError').textContent = 'Price must be a positive number';
+    isValid = false;
+  }
+  
+  // Validate Miles
+  const miles = document.getElementById('inv_miles').value;
+  if (!miles && miles !== '0') {
+    document.getElementById('milesError').textContent = 'Miles is required';
+    isValid = false;
+  } else if (miles < 0) {
+    document.getElementById('milesError').textContent = 'Miles must be a positive number';
+    isValid = false;
+  }
+  
+  // Validate Color
+  const color = document.getElementById('inv_color').value.trim();
+  if (!color) {
+    document.getElementById('colorError').textContent = 'Color is required';
+    isValid = false;
+  } else if (!/^[A-Za-z\s]+$/.test(color)) {
+    document.getElementById('colorError').textContent = 'Color should only contain letters and spaces';
+    isValid = false;
+  }
+  
+  // Validate Classification
+  const classification = document.getElementById('classificationList').value;
+  if (!classification) {
+    alert('Please select a classification');
+    isValid = false;
+  }
+  
+  if (!isValid) {
+    e.preventDefault();
+  }
+});
+</script>
