@@ -1,0 +1,98 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<% if (title) { %>
+  <h1><%= title %></h1>
+<% } else { 
+  res.redirect('/')
+} %>
+
+<%- messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+  <% errors.array().forEach(error => { %>
+    <li><%= error.msg %></li>
+  <% }) %>
+  </ul>
+<% } %>
+
+<form action="/inv/update" method="post">
+  <fieldset>
+    <legend>Edit Vehicle Information</legend>
+    
+    <label for="classification_id">Classification:</label>
+    <select name="classification_id" id="classification_id" required>
+      <%- classificationSelect %>
+    </select>
+    
+    <label for="inv_make">Make:</label>
+    <input name="inv_make" id="inv_make" type="text" value="<%= locals.inv_make %>" required>
+    
+    <label for="inv_model">Model:</label>
+    <input name="inv_model" id="inv_model" type="text" value="<%= locals.inv_model %>" required>
+    
+    <label for="inv_year">Year:</label>
+    <input name="inv_year" id="inv_year" type="text" value="<%= locals.inv_year %>" required>
+    
+    <label for="inv_description">Description:</label>
+    <textarea name="inv_description" id="inv_description" rows="3" required><%= locals.inv_description %></textarea>
+    
+    <label for="inv_image">Image Path:</label>
+    <input name="inv_image" id="inv_image" type="text" value="<%= locals.inv_image %>" required>
+    
+    <label for="inv_thumbnail">Thumbnail Path:</label>
+    <input name="inv_thumbnail" id="inv_thumbnail" type="text" value="<%= locals.inv_thumbnail %>" required>
+    
+    <label for="inv_price">Price:</label>
+    <input name="inv_price" id="inv_price" type="number" step="0.01" value="<%= locals.inv_price %>" required>
+    
+    <label for="inv_miles">Miles:</label>
+    <input name="inv_miles" id="inv_miles" type="number" value="<%= locals.inv_miles %>" required>
+    
+    <label for="inv_color">Color:</label>
+    <input name="inv_color" id="inv_color" type="text" value="<%= locals.inv_color %>" required>
+    
+    <!-- Hidden field to pass inv_id -->
+    <input type="hidden" name="inv_id" value="<%= locals.inv_id %>">
+    
+    <input type="submit" name="submit" id="updateBtn" value="Update Vehicle">
+    <a href="/inv/" id="cancelLink">Cancel</a>
+  </fieldset>
+</form>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.querySelector("form")
+    const updateBtn = document.getElementById("updateBtn")
+    const originalData = new FormData(form)
+    
+    // Initially disable the update button
+    updateBtn.disabled = true
+    
+    // Function to check if form data has changed
+    function checkForChanges() {
+        const currentData = new FormData(form)
+        let hasChanges = false
+        
+        // Compare all form fields
+        for (let [key, value] of currentData.entries()) {
+            if (originalData.get(key) !== value) {
+                hasChanges = true
+                break
+            }
+        }
+        
+        updateBtn.disabled = !hasChanges
+    }
+    
+    // Add event listeners to all form inputs
+    const inputs = form.querySelectorAll('input, select, textarea')
+    inputs.forEach(input => {
+        input.addEventListener('input', checkForChanges)
+        input.addEventListener('change', checkForChanges)
+    })
+})
+</script>
+
+<%- include('../partials/footer') %>
