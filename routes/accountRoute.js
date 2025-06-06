@@ -5,6 +5,7 @@ const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
 
+
 // Only require validation if the file exists
 let regValidate;
 try {
