@@ -39,18 +39,12 @@ router.post(
   utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process the login request - with or without validation
-if (regValidate && regValidate.loginRules && regValidate.checkLoginData) {
-  // With validation middleware
-  router.post(
-    "/login",
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
-    utilities.handleErrors(accountController.login)
-  );
-} else {
-  // Without validation middleware (temporary solution)
-  router.post("/login", utilities.handleErrors(accountController.login));
-}
+// Process the login request
+router.post(
+  "/login",
+  regValidate.loginRules(),
+  regValidate.checkLoginData,
+  utilities.handleErrors(accountController.accountLogin)
+);
 
 module.exports = router;
