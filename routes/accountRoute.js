@@ -6,15 +6,6 @@ const accountController = require("../controllers/accountController");
 const regValidate = require("../utilities/account-validation");
 
 
-// Only require validation if the file exists
-let regValidate;
-try {
-  regValidate = require('../utilities/account-validation');
-} catch (error) {
-  console.log("Validation middleware not found - proceeding without validation");
-  regValidate = null;
-}
-
 // Route to build "My Account" view - COMMENTED OUT until you implement buildAccount
 // router.get(
 //   "/", 
