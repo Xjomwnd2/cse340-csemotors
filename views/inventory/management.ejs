@@ -1,269 +1,41 @@
-<%- include('../partials/header') %>
+ Account Management View (views/account/management.ejs)
+// ============================================================================
 
-<div class="management-container">
-    <!-- Management Links Section -->
-    <div class="management-links">
-        <h1>Vehicle Management</h1>
-        <p>Welcome to the vehicle management area. Choose a management activity below:</p>
-        
-        <div class="link-container">
-            <a href="/inv/add-classification" class="management-link">
-                <span class="link-icon">📁</span>
-                Add New Classification
-            </a>
-            <a href="/inv/add-inventory" class="management-link">
-                <span class="link-icon">🚗</span>
-                Add New Vehicle
-            </a>
-        </div>
-    </div>
+<%
+// Account management view with conditional content based on account type
+%>
+<% if (title) { %>
+    <h1><%= title %></h1>
+<% } else { %>
+    <h1>Account Management</h1>
+<% } %>
 
-    <!-- Inventory Management Section -->
-    <div class="inventory-management">
-        <h2>Manage Inventory</h2>
-        <p>Select a classification from the list to see the items belonging to the classification.</p>
-        
-        <!-- Classification Select List -->
-        <div class="classification-selector">
-            <label for="classificationList">Choose a Classification:</label>
-            <%- classificationSelect %>
-        </div>
+<% if (locals.errors) { %>
+    <ul class="notice">
+        <% locals.errors.forEach(error => { %>
+            <li><%= error.msg %></li>
+        <% }) %>
+    </ul>
+<% } %>
 
-        <!-- Empty Table for Dynamic Content -->
-        <table id="inventoryDisplay"></table>
+<% if (locals.messages) { %>
+    <ul class="notice">
+        <% locals.messages.forEach(message => { %>
+            <li><%= message %></li>
+        <% }) %>
+    </ul>
+<% } %>
 
-        <!-- No JavaScript Message -->
-        <noscript>JavaScript must be enabled to use this page.</noscript>
-    </div>
-</div>
-
-<style>
-    .management-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .management-links {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 30px;
-        border-radius: 15px;
-        margin-bottom: 30px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-    }
-
-    .management-links h1 {
-        margin: 0 0 15px 0;
-        font-size: 2.5em;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .management-links p {
-        margin-bottom: 25px;
-        font-size: 1.1em;
-        opacity: 0.9;
-    }
-
-    .link-container {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 20px;
-    }
-
-    .management-link {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-        background: rgba(255, 255, 255, 0.2);
-        padding: 20px;
-        border-radius: 12px;
-        text-decoration: none;
-        color: white;
-        font-weight: 600;
-        font-size: 1.1em;
-        transition: all 0.3s ease;
-        backdrop-filter: blur(10px);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .management-link:hover {
-        background: rgba(255, 255, 255, 0.3);
-        transform: translateY(-3px);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .link-icon {
-        font-size: 1.5em;
-    }
-
-    .inventory-management {
-        background: white;
-        padding: 30px;
-        border-radius: 15px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-        border: 2px solid #e9ecef;
-    }
-
-    .inventory-management h2 {
-        color: #333;
-        margin-bottom: 15px;
-        font-size: 2em;
-        border-bottom: 3px solid #667eea;
-        padding-bottom: 10px;
-    }
-
-    .inventory-management p {
-        color: #666;
-        margin-bottom: 25px;
-        font-size: 1.1em;
-        line-height: 1.6;
-    }
-
-    .classification-selector {
-        margin-bottom: 30px;
-    }
-
-    .classification-selector label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 600;
-        color: #333;
-        font-size: 1.1em;
-    }
-
-    #classificationList {
-        width: 100%;
-        max-width: 400px;
-        padding: 12px 16px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-        font-size: 16px;
-        background: white;
-        transition: all 0.3s ease;
-    }
-
-    #classificationList:focus {
-        outline: none;
-        border-color: #667eea;
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-    }
-
-    #inventoryDisplay {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    #inventoryDisplay th {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        color: white;
-        padding: 15px;
-        text-align: left;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-size: 0.9em;
-    }
-
-    #inventoryDisplay td {
-        padding: 15px;
-        border-bottom: 1px solid #eee;
-        transition: background-color 0.3s ease;
-    }
-
-    #inventoryDisplay tr:hover td {
-        background-color: #f8f9fa;
-    }
-
-    #inventoryDisplay tr:last-child td {
-        border-bottom: none;
-    }
-
-    noscript {
-        display: block;
-        background: #f8d7da;
-        color: #721c24;
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid #f5c6cb;
-        margin-top: 20px;
-        font-weight: 600;
-        text-align: center;
-    }
-
-    /* Responsive Design */
-    @media (max-width: 768px) {
-        .management-container {
-            padding: 15px;
-        }
-
-        .management-links {
-            padding: 20px;
-        }
-
-        .management-links h1 {
-            font-size: 2em;
-        }
-
-        .link-container {
-            grid-template-columns: 1fr;
-        }
-
-        .inventory-management {
-            padding: 20px;
-        }
-
-        .inventory-management h2 {
-            font-size: 1.5em;
-        }
-
-        #classificationList {
-            max-width: 100%;
-        }
-
-        #inventoryDisplay {
-            font-size: 14px;
-        }
-
-        #inventoryDisplay th,
-        #inventoryDisplay td {
-            padding: 10px 8px;
-        }
-    }
-
-    /* Loading State */
-    .loading {
-        text-align: center;
-        padding: 40px;
-        color: #666;
-        font-style: italic;
-    }
-
-    .loading::after {
-        content: '';
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border: 2px solid #667eea;
-        border-top: 2px solid transparent;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-left: 10px;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-</style>
-
-<!-- Include the JavaScript file -->
-<script src="../../js/inventory.js"></script>
-
-<%- include('../partials/footer') %>
+<!-- Greeting based on account type -->
+<% if (locals.accountData) { %>
+    <h2>Welcome <%= locals.accountData.account_firstname %></h2>
+    
+    <!-- Update Account Information Link (for all users) -->
+    <p><a href="/account/update/<%= locals.accountData.account_id %>">Update Account Information</a></p>
+    
+    <!-- Inventory Management (only for Employee/Admin) -->
+    <% if (locals.accountData.account_type === "Employee" || locals.accountData.account_type === "Admin") { %>
+        <h3>Inventory Management</h3>
+        <p><a href="/inv">Access Inventory Management</a></p>
+    <% } %>
+<% } %>
