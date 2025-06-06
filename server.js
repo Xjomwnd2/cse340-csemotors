@@ -27,6 +27,54 @@ app.use(async (req, res, next) => {
   }
 });
 
+============================================================================
+// TASK 2: Authorization Middleware (middleware/auth.js)
+// ============================================================================
+
+const jwt = require('jsonwebtoken');
+const { validationResult } = require('express-validator');
+const utilities = require('../utilities');
+
+// Check if user is logged in
+const checkJWTToken = (req, res, next) => {
+    if (req.cookies.jwt) {
+        jwt.verify(
+            req.cookies.jwt,
+            process.env.ACCESS_TOKEN_SECRET,
+            (err, accountData) => {
+                if (err) {
+                    req.flash("Please log in");
+                    res.clearCookie("jwt");
+                    return res.redirect("/account/login");
+                }
+                res.locals.accountData = accountData;
+                res.locals.loggedin = 1;
+                next();
+            }
+        );
+    } else {
+        next();
+    }
+};
+
+// Check account type for inventory access
+const checkAccountType = (req, res, next) => {
+    if (res.locals.loggedin) {
+        const accountType = res.locals.accountData.account_type;
+        if (accountType == "Employee" || accountType == "Admin") {
+            next();
+        } else {
+            req.flash("notice", "Please log in with appropriate credentials.");
+            return res.redirect("/account/login");
+        }
+    } else {
+        req.flash("notice", "Please log in.");
+        return res.redirect("/account/login");
+    }
+};
+
+module.exports = { checkJWTToken, checkAccountType };
+
 /* ***********************
  * Other Middleware
  *************************/
