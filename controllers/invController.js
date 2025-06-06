@@ -155,6 +155,9 @@ async function buildDeleteView(req, res, next) {
  *  Export Controller
  * ************************** */
 module.exports = {
-  invCont,
+  buildByClassificationId: invCont.buildByClassificationId,
+  editInventoryView: invCont.editInventoryView,
+  getInventoryJSON: invCont.getInventoryJSON,
+  updateInventory: invCont.updateInventory,
   buildDeleteView,
 };
