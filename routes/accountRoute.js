@@ -5,7 +5,6 @@ const express = require("express");
 const router = new express.Router();
 const utilities = require("../utilities");
 const accountController = require("../controllers/accountController");
-const regValidate = require('../path/to/regValidate');
 
 
 // Only require validation if the file exists
