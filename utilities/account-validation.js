@@ -4,7 +4,7 @@ const accountModel = require("../models/account-model");
 const validate = {};
 
 // Registration validation rules
-validate.registationRules = () => {
+validate.registrationRules = () => {
   return [
     body("account_firstname")
       .trim()
