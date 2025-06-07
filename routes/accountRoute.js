@@ -16,11 +16,14 @@ try {
   regValidate = null;
 }
 
-// Route to build "My Account" view
-router.get(
-  "/",
-  utilities.handleErrors(accountController.buildAccount)
-);
+// Debug: Check what methods are available in accountController
+console.log('Available controller methods:', Object.keys(accountController));
+
+// Route to build "My Account" view - COMMENTED OUT until buildAccount is implemented
+// router.get(
+//   "/",
+//   utilities.handleErrors(accountController.buildAccount)
+// );
 
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -30,36 +33,56 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 
 // Route to process the registration form submission
 if (regValidate) {
-  // With validation
-  router.post(
-    "/register",
-    regValidate.registrationRules(),
-    regValidate.checkRegData,
-    utilities.handleErrors(accountController.registerAccount)
-  );
+  // With validation - check if the method exists first
+  const registerMethod = accountController.registerAccount || accountController.register;
+  if (registerMethod) {
+    router.post(
+      "/register",
+      regValidate.registrationRules(),
+      regValidate.checkRegData,
+      utilities.handleErrors(registerMethod)
+    );
+  } else {
+    console.error('No register method found in accountController');
+  }
 } else {
   // Without validation (fallback)
-  router.post(
-    "/register",
-    utilities.handleErrors(accountController.registerAccount)
-  );
+  const registerMethod = accountController.registerAccount || accountController.register;
+  if (registerMethod) {
+    router.post(
+      "/register",
+      utilities.handleErrors(registerMethod)
+    );
+  } else {
+    console.error('No register method found in accountController');
+  }
 }
 
 // Route to process the login request
 if (regValidate) {
-  // With validation
-  router.post(
-    "/login",
-    regValidate.loginRules(),
-    regValidate.checkLoginData,
-    utilities.handleErrors(accountController.accountLogin)
-  );
+  // With validation - check if the method exists first
+  const loginMethod = accountController.accountLogin || accountController.login;
+  if (loginMethod) {
+    router.post(
+      "/login",
+      regValidate.loginRules(),
+      regValidate.checkLoginData,
+      utilities.handleErrors(loginMethod)
+    );
+  } else {
+    console.error('No login method found in accountController');
+  }
 } else {
   // Without validation (fallback)
-  router.post(
-    "/login",
-    utilities.handleErrors(accountController.accountLogin)
-  );
+  const loginMethod = accountController.accountLogin || accountController.login;
+  if (loginMethod) {
+    router.post(
+      "/login",
+      utilities.handleErrors(loginMethod)
+    );
+  } else {
+    console.error('No login method found in accountController');
+  }
 }
 
 // Debug logging (remove in production)
