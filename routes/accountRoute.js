@@ -41,6 +41,10 @@ if (regValidate) {
   );
 }
 
+console.log('regValidate:', regValidate);
+console.log('registrationRules:', regValidate ? regValidate.registrationRules : 'undefined');
+console.log('checkRegData:', regValidate ? regValidate.checkRegData : 'undefined');
+
 // Process the login request (with validation if available)
 if (regValidate) {
   router.post(
