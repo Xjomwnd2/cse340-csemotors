@@ -30,6 +30,16 @@ router.get("/register", utilities.handleErrors(accountController.buildRegister))
 // Route to process the registration form submission
 router.post('/register', utilities.handleErrors(accountController.register));
 
+// Process the registration data (with validation if available)
+if (regValidate) {
+  router.post(
+    "/register",
+    regValidate.registrationRules(), // Fixed typo: was "registationRules"
+    regValidate.checkRegData,
+    utilities.handleErrors(accountController.registerAccount)
+  );
+}
+
 // Process the login request (with validation if available)
 if (regValidate) {
   router.post(
