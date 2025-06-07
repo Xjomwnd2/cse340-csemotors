@@ -16,14 +16,21 @@ try {
   regValidate = null;
 }
 
-// Debug: Check what methods are available in accountController
+// Debug: Check what methods are available
 console.log('Available controller methods:', Object.keys(accountController));
+if (regValidate) {
+  console.log('Available validation methods:', Object.keys(regValidate));
+  console.log('registrationRules type:', typeof regValidate.registrationRules);
+  console.log('checkRegData type:', typeof regValidate.checkRegData);
+  console.log('loginRules type:', typeof regValidate.loginRules);
+  console.log('checkLoginData type:', typeof regValidate.checkLoginData);
+}
 
-// Route to build "My Account" view - COMMENTED OUT until buildAccount is implemented
-// router.get(
-//   "/",
-//   utilities.handleErrors(accountController.buildAccount)
-// );
+// Route to build "My Account" view
+router.get(
+  "/",
+  utilities.handleErrors(accountController.buildAccount)
+);
 
 // Route to build login view
 router.get("/login", utilities.handleErrors(accountController.buildLogin));
@@ -32,56 +39,46 @@ router.get("/login", utilities.handleErrors(accountController.buildLogin));
 router.get("/register", utilities.handleErrors(accountController.buildRegister));
 
 // Route to process the registration form submission
-if (regValidate) {
-  // With validation - check if the method exists first
-  const registerMethod = accountController.registerAccount || accountController.register;
-  if (registerMethod) {
-    router.post(
-      "/register",
-      regValidate.registrationRules(),
-      regValidate.checkRegData,
-      utilities.handleErrors(registerMethod)
-    );
-  } else {
-    console.error('No register method found in accountController');
-  }
+if (regValidate && 
+    typeof regValidate.registrationRules === 'function' && 
+    typeof regValidate.checkRegData === 'function') {
+  // With validation
+  router.post(
+    "/register",
+    regValidate.registrationRules(),
+    regValidate.checkRegData,
+    utilities.handleErrors(accountController.register)
+  );
 } else {
   // Without validation (fallback)
-  const registerMethod = accountController.registerAccount || accountController.register;
-  if (registerMethod) {
-    router.post(
-      "/register",
-      utilities.handleErrors(registerMethod)
-    );
-  } else {
-    console.error('No register method found in accountController');
+  router.post(
+    "/register",
+    utilities.handleErrors(accountController.register)
+  );
+  if (regValidate) {
+    console.log('Registration validation methods not properly defined');
   }
 }
 
 // Route to process the login request
-if (regValidate) {
-  // With validation - check if the method exists first
-  const loginMethod = accountController.accountLogin || accountController.login;
-  if (loginMethod) {
-    router.post(
-      "/login",
-      regValidate.loginRules(),
-      regValidate.checkLoginData,
-      utilities.handleErrors(loginMethod)
-    );
-  } else {
-    console.error('No login method found in accountController');
-  }
+if (regValidate && 
+    typeof regValidate.loginRules === 'function' && 
+    typeof regValidate.checkLoginData === 'function') {
+  // With validation
+  router.post(
+    "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    utilities.handleErrors(accountController.accountLogin)
+  );
 } else {
   // Without validation (fallback)
-  const loginMethod = accountController.accountLogin || accountController.login;
-  if (loginMethod) {
-    router.post(
-      "/login",
-      utilities.handleErrors(loginMethod)
-    );
-  } else {
-    console.error('No login method found in accountController');
+  router.post(
+    "/login",
+    utilities.handleErrors(accountController.accountLogin)
+  );
+  if (regValidate) {
+    console.log('Login validation methods not properly defined');
   }
 }
 
