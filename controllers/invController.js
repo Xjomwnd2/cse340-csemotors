@@ -1,5 +1,8 @@
 const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
+const { getCommentsByInvId } = require("../models/commentsModel"); // ✅ Comment model
+const { getInventoryById } = require("../models/inventory-model");
+
 
 
 const invCont = {};
@@ -46,6 +49,33 @@ invCont.editInventoryView = async function (req, res, next) {
     inv_color: itemData.inv_color,
     classification_id: itemData.classification_id,
   });
+};
+
+/* ***************************
+ *  Build Vehicle Detail View (with Comments)
+ * ************************** */
+invCont.buildVehicleDetail = async function (req, res, next) {
+  try {
+    const invId = parseInt(req.params.invId);
+
+    const vehicle = await invModel.getInventoryById(invId); // existing model method
+    const comments = await getCommentsByInvId(invId); // from commentsModel
+
+    if (!vehicle) {
+      throw new Error("Vehicle not found.");
+    }
+
+    const nav = await utilities.getNav();
+
+    res.render("./inventory/vehicle-detail", {
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+      vehicle,
+      comments,
+      nav,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 /* ***************************
