@@ -190,4 +190,5 @@ module.exports = {
   getInventoryJSON: invCont.getInventoryJSON,
   updateInventory: invCont.updateInventory,
   buildDeleteView,
+  buildVehicleDetail: invCont.buildVehicleDetail, // ✅ add this
 };
