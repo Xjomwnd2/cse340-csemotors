@@ -40,6 +40,26 @@ ALTER TABLE IF EXISTS public.inventory
 	ON UPDATE CASCADE
 	ON DELETE NO ACTION;
 
+  -- Create relationship between 'classification' and 'inventory' tables
+ALTER TABLE IF EXISTS public.inventory
+    ADD CONSTRAINT fk_classification FOREIGN KEY (classification_id)
+    REFERENCES public.classification (classification_id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION;
+
+-- Table structure for table 'comments' additional enhancement
+DROP TABLE IF EXISTS public.comments;
+
+CREATE TABLE public.comments (
+  comment_id SERIAL PRIMARY KEY,
+  inv_id INT NOT NULL,
+  commenter_name VARCHAR(100) NOT NULL,
+  comment_text TEXT NOT NULL,
+  comment_date TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (inv_id) REFERENCES public.inventory(inv_id) ON DELETE CASCADE
+);
+
+
     -- Table structure for table `account`
 CREATE TABLE IF NOT EXISTS public.account
 (
