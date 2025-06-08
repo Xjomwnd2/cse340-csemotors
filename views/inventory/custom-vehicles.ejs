@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Vehicles</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #00b894, #00cec9);
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 2.5rem;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .vehicle-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .vehicle-image {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #666;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .batmobile { background: linear-gradient(45deg, #2c3e50, #34495e); color: white; }
+        .fbi-van { background: linear-gradient(45deg, #8b4513, #a0522d); color: white; }
+        .dog-car { background: linear-gradient(45deg, #e8e8e8, #ffffff); color: #333; }
+        .aerocar { background: linear-gradient(45deg, #f39c12, #e67e22); color: white; }
+
+        .vehicle-info {
+            padding: 1.5rem;
+        }
+
+        .vehicle-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        .vehicle-price {
+            font-size: 1.3rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .purchase-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .purchase-btn:hover {
+            background: linear-gradient(45deg, #764ba2, #667eea);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .purchase-btn:active {
+            transform: translateY(0);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+        }
+
+        .modal h2 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+
+        .modal p {
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .confirm-btn, .cancel-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .confirm-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #27ae60;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 5px;
+            display: none;
+            z-index: 1001;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="nav">
+            <a href="#home">Home</a>
+            <a href="#custom">Custom</a>
+            <a href="#sedan">Sedan</a>
+            <a href="#sport">Sport</a>
+            <a href="#suv">SUV</a>
+            <a href="#truck">Truck</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h1>Custom Vehicles</h1>
+        
+        <div class="vehicle-grid">
+            <div class="vehicle-card">
+                <div class="vehicle-image batmobile">🦇 Batmobile</div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Batmobile Custom</div>
+                    <div class="vehicle-price">$65,000</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Batmobile Custom', '$65,000')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image fbi-van">🚐 FBI Van</div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">FBI Surveillance Van</div>
+                    <div class="vehicle-price">$20,000</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('FBI Surveillance Van', '$20,000')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image dog-car">🐕 Dog Car</div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Dog Car</div>
+                    <div class="vehicle-price">$35,000</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Dog Car', '$35,000')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image aerocar">✈️ Aerocar</div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Aerocar International Aerocar</div>
+                    <div class="vehicle-price">$700,000</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Aerocar International Aerocar', '$700,000')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Purchase</h2>
+            <p id="purchaseDetails"></p>
+            <div class="modal-buttons">
+                <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
+                <button class="cancel-btn" onclick="closePurchaseModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">
+        Purchase successful! 🎉
+    </div>
+
+    <script>
+        let currentVehicle = '';
+        let currentPrice = '';
+
+        function openPurchaseModal(vehicle, price) {
+            currentVehicle = vehicle;
+            currentPrice = price;
+            document.getElementById('purchaseDetails').innerHTML = 
+                `Are you sure you want to purchase the <strong>${vehicle}</strong> for <strong>${price}</strong>?`;
+            document.getElementById('purchaseModal').style.display = 'block';
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        function confirmPurchase() {
+            // Simulate purchase process
+            closePurchaseModal();
+            
+            // Show success message
+            const successMsg = document.getElementById('successMessage');
+            successMsg.innerHTML = `🎉 Successfully purchased ${currentVehicle} for ${currentPrice}!`;
+            successMsg.style.display = 'block';
+            
+            // Hide success message after 3 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 3000);
+            
+            // Here you would typically send the purchase data to your server
+            console.log('Purchase confirmed:', {
+                vehicle: currentVehicle,
+                price: currentPrice,
+                timestamp: new Date().toISOString()
+            });
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
+                closePurchaseModal();
+            }
+        }
+    </script>
+</body>
+</html>
