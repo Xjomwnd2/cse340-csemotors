@@ -1,11 +1,10 @@
-const pool = require("../database/");
+const pool = require("../database/")
 
 /* ***************************
  *  Get all classification data
- *  Returns a list of classifications sorted by name
  * ************************** */
 async function getClassifications(){
-  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name");
+  return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
 /* ***************************
@@ -19,66 +18,77 @@ async function getInventoryByClassificationId(classification_id) {
       ON i.classification_id = c.classification_id 
       WHERE i.classification_id = $1`,
       [classification_id]
-    );
-    return data.rows;
+    )
+    return data.rows
   } catch (error) {
-    console.error("getclassificationsbyid error " + error);
-    return [];
+    console.error("getclassificationsbyid error " + error)
   }
-};
+}
 
 /* ***************************
- *  Get inventory item by ID
- *  Used to display inventory details
+ *  Get vehicle by inventory_id
  * ************************** */
-async function getInventoryById(inv_id) {
+async function getInventoryByInventoryId(inventory_id) {
   try {
     const data = await pool.query(
-      `SELECT * FROM public.inventory AS i
-      JOIN public.classification AS c
-      ON i.classification_id = c.classification_id
-      WHERE i.inv_id = $1`,
-      [inv_id]
-    );
-    return data.rows[0]; // Return just the one item
+      `SELECT * FROM public.inventory WHERE inventory_id = $1`,
+      [inventory_id]
+    )
+    return data.rows
   } catch (error) {
-    console.error("getInventoryById error " + error);
-    return null;
+    console.error("getInventoryByInventoryId error " + error)
   }
-};
+}
 
 /* **********************
- *   Check for existing email
+ *   Check for existing classification
  * ********************* */
-async function checkExistingEmail(account_email){
+async function checkExistingClassification(classification_name){
   try {
-    const sql = "SELECT * FROM account WHERE account_email = $1";
-    const email = await pool.query(sql, [account_email]);
-    return email.rowCount;
+    const sql = "SELECT * FROM classification WHERE classification_name = $1"
+    const classification = await pool.query(sql, [classification_name])
+    return classification.rowCount
   } catch (error) {
-    return error.message;
+    return error.message
   }
-};
+}
 
-/* ***********************************************************
-* Delete Inventory Item
-* Unit 5, Delete Activity
-*********************************************************** */
-async function deleteInventoryItem(inv_id) {
+/* **********************
+ *   Add new classification
+ * ********************* */
+async function addClassification(classification_name){
   try {
-    const sql = "DELETE FROM inventory WHERE inv_id = $1";
-    const data = await pool.query(sql, [inv_id]);
-    return data;
+    const sql = "INSERT INTO classification (classification_name) VALUES ($1) RETURNING *"
+    return await pool.query(sql, [classification_name])
   } catch (error) {
-    throw new Error("Delete Inventory Error");
+    return error.message
   }
-};
+}
 
-// ✅ Export all functions including the new one
+/* **********************
+ *   Add new inventory item
+ * ********************* */
+async function addInventory(inv_make, inv_model, inv_year, inv_description, 
+                           inv_image, inv_thumbnail, inv_price, inv_miles, 
+                           inv_color, classification_id){
+  try {
+    const sql = `INSERT INTO inventory 
+                (inv_make, inv_model, inv_year, inv_description, inv_image, 
+                 inv_thumbnail, inv_price, inv_miles, inv_color, classification_id) 
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`
+    return await pool.query(sql, [inv_make, inv_model, inv_year, inv_description, 
+                                  inv_image, inv_thumbnail, inv_price, inv_miles, 
+                                  inv_color, classification_id])
+  } catch (error) {
+    return error.message
+  }
+}
+
 module.exports = {
-  getClassifications,
-  getInventoryByClassificationId,
-  getInventoryById, // 👈 Make sure this is exported!
-  checkExistingEmail,
-  deleteInventoryItem
-};
+  getClassifications, 
+  getInventoryByClassificationId, 
+  getInventoryByInventoryId,
+  checkExistingClassification,
+  addClassification,
+  addInventory
+}
