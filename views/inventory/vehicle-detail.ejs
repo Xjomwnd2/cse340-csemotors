@@ -1,20 +1,46 @@
-<h2>Leave a Comment</h2>
-<form action="/comments/add" method="POST">
-  <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
-  <label for="commenter_name">Name:</label>
-  <input type="text" name="commenter_name" required>
-  <label for="comment_text">Comment:</label>
-  <textarea name="comment_text" required></textarea>
-  <button type="submit">Submit</button>
-</form>
-
-<h2>Comments</h2>
-<% if (comments && comments.length > 0) { %>
-  <% comments.forEach(c => { %>
-    <p><strong><%= c.commenter_name %></strong> (<%= new Date(c.comment_date).toLocaleString() %>)</p>
-    <p><%= c.comment_text %></p>
-    <hr>
-  <% }) %>
-<% } else { %>
-  <p>No comments yet.</p>
+<!-- FLASH MESSAGE HANDLING -->
+<% if (messages('error').length > 0) { %>
+  <div class="flash error">
+    <%= messages('error')[0] %>
+  </div>
 <% } %>
+
+<% if (messages('notice').length > 0) { %>
+  <div class="flash notice">
+    <%= messages('notice')[0] %>
+  </div>
+<% } %>
+
+<!-- COMMENT FORM -->
+<section id="comment-form">
+  <h2>Leave a Comment</h2>
+  <form action="/comments/add" method="POST">
+    <!-- Hidden input to track vehicle ID -->
+    <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+
+    <label for="commenter_name">Your Name:</label>
+    <input type="text" name="commenter_name" id="commenter_name" required>
+
+    <label for="comment_text">Your Comment:</label>
+    <textarea name="comment_text" id="comment_text" rows="4" required></textarea>
+
+    <button type="submit">Submit Comment</button>
+  </form>
+</section>
+
+<!-- COMMENT LIST -->
+<section id="comment-list">
+  <h2>Comments</h2>
+  <% if (comments && comments.length > 0) { %>
+    <% comments.forEach(comment => { %>
+      <div class="comment">
+        <p><strong><%= comment.commenter_name %></strong>
+        <em>(<%= new Date(comment.comment_date).toLocaleString() %>)</em></p>
+        <p><%= comment.comment_text %></p>
+        <hr>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p>No comments yet. Be the first to comment!</p>
+  <% } %>
+</section>
