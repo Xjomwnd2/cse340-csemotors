@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SUV Vehicles - CSE340 Motors</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2d5016 0%, #68b738 100%);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(90deg, #2d5016, #4a7c59);
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .nav a:hover, .nav a.active {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.95);
+            margin-top: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2d5016;
+            font-size: 3rem;
+            font-weight: 300;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .vehicle-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .vehicle-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+        }
+
+        .vehicle-image {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .suv-luxury { background: linear-gradient(45deg, #2d5016, #4a7c59); }
+        .suv-family { background: linear-gradient(45deg, #68b738, #a8e6cf); }
+        .suv-offroad { background: linear-gradient(45deg, #8b4513, #d2691e); }
+        .suv-electric { background: linear-gradient(45deg, #27ae60, #2ecc71); }
+        .suv-performance { background: linear-gradient(45deg, #34495e, #2c3e50); }
+        .suv-compact { background: linear-gradient(45deg, #3498db, #5dade2); }
+
+        .vehicle-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d5016;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .capacity-indicator {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2d5016;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .vehicle-info {
+            padding: 2rem;
+        }
+
+        .vehicle-title {
+            font-size: 1.6rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #2d5016;
+        }
+
+        .vehicle-specs {
+            color: #7f8c8d;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .vehicle-price {
+            font-size: 1.5rem;
+            color: #27ae60;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .purchase-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #2d5016, #68b738);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .purchase-btn:hover {
+            background: linear-gradient(45deg, #68b738, #2d5016);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(45, 80, 22, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal h2 {
+            color: #2d5016;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .modal p {
+            margin-bottom: 2rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .confirm-btn, .cancel-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .confirm-btn {
+            background: #27ae60;
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background: #2ecc71;
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            color: white;
+            padding: 1.5rem 2.5rem;
+            border-radius: 10px;
+            display: none;
+            z-index: 1001;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <nav class="nav">
+            <a href="/inv/type/home">Home</a>
+            <a href="/inv/type/custom">Custom</a>
+            <a href="/inv/type/sedan">Sedan</a>
+            <a href="/inv/type/sport">Sport</a>
+            <a href="/inv/type/suv" class="active">SUV</a>
+            <a href="/inv/type/truck">Truck</a>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h1>Sport Utility Vehicles</h1>
+        
+        <div class="vehicle-grid">
+            <div class="vehicle-card">
+                <div class="vehicle-image suv-luxury">
+                    <span>👑</span>
+                    <div class="vehicle-badge">Luxury</div>
+                    <div class="capacity-indicator">7 Seats</div>
+                </div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Range Rover Sport</div>
+                    <div class="vehicle-specs">V8 Engine • 518 HP • AWD • Air Suspension</div>
+                    <div class="vehicle-price">$83,500</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Range Rover Sport', '$83,500', 'Luxury SUV with unmatched capability')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image suv-family">
+                    <span>👨‍👩‍👧‍👦</span>
+                    <div class="vehicle-badge">Family</div>
+                    <div class="capacity-indicator">8 Seats</div>
+                </div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Toyota Highlander</div>
+                    <div class="vehicle-specs">V6 Engine • 295 HP • AWD • Safety Sense 2.0</div>
+                    <div class="vehicle-price">$36,420</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Toyota Highlander', '$36,420', 'Reliable family SUV with 3 rows')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image suv-offroad">
+                    <span>🏔️</span>
+                    <div class="vehicle-badge">Off-Road</div>
+                    <div class="capacity-indicator">5 Seats</div>
+                </div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Jeep Wrangler Rubicon</div>
+                    <div class="vehicle-specs">V6 Engine • 285 HP • 4WD • Rock Rails</div>
+                    <div class="vehicle-price">$43,895</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Jeep Wrangler Rubicon', '$43,895', 'Ultimate off-road adventure vehicle')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image suv-electric">
+                    <span>⚡</span>
+                    <div class="vehicle-badge">Electric</div>
+                    <div class="capacity-indicator">5 Seats</div>
+                </div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Tesla Model X</div>
+                    <div class="vehicle-specs">Dual Motor • 670 HP • AWD • 348 Mile Range</div>
+                    <div class="vehicle-price">$98,490</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Tesla Model X', '$98,490', 'Electric SUV with falcon wing doors')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image suv-performance">
+                    <span>🏁</span>
+                    <div class="vehicle-badge">Performance</div>
+                    <div class="capacity-indicator">5 Seats</div>
+                </div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">BMW X5 M Competition</div>
+                    <div class="vehicle-specs">Twin-Turbo V8 • 617 HP • AWD • M Sport Package</div>
+                    <div class="vehicle-price">$108,900</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('BMW X5 M Competition', '$108,900', 'High-performance luxury SUV')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+
+            <div class="vehicle-card">
+                <div class="vehicle-image suv-compact">
+                    <span>🏙️</span>
+                    <div class="vehicle-badge">Compact</div>
+                    <div class="capacity-indicator">5 Seats</div>
+                </div>
+                <div class="vehicle-info">
+                    <div class="vehicle-title">Mazda CX-5</div>
+                    <div class="vehicle-specs">Turbo 4-Cyl • 250 HP • AWD • Premium Interior</div>
+                    <div class="vehicle-price">$28,900</div>
+                    <button class="purchase-btn" onclick="openPurchaseModal('Mazda CX-5', '$28,900', 'Compact SUV with premium feel')">
+                        Purchase Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Purchase Modal -->
+    <div id="purchaseModal" class="modal">
+        <div class="modal-content">
+            <h2>Confirm Purchase</h2>
+            <p id="purchaseDetails"></p>
+            <div class="modal-buttons">
+                <button class="confirm-btn" onclick="confirmPurchase()">Confirm Purchase</button>
+                <button class="cancel-btn" onclick="closePurchaseModal()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    <div id="successMessage" class="success-message">
+        Purchase successful! 🎉
+    </div>
+
+    <script>
+        let currentVehicle = '';
+        let currentPrice = '';
+        let currentDescription = '';
+
+        function openPurchaseModal(vehicle, price, description) {
+            currentVehicle = vehicle;
+            currentPrice = price;
+            currentDescription = description;
+            document.getElementById('purchaseDetails').innerHTML = 
+                `<strong>${vehicle}</strong><br>
+                 ${description}<br><br>
+                 Price: <strong>${price}</strong><br><br>
+                 Ready for your next adventure?`;
+            document.getElementById('purchaseModal').style.display = 'block';
+        }
+
+        function closePurchaseModal() {
+            document.getElementById('purchaseModal').style.display = 'none';
+        }
+
+        function confirmPurchase() {
+            closePurchaseModal();
+            
+            const successMsg = document.getElementById('successMessage');
+            successMsg.innerHTML = `🚙 Successfully purchased ${currentVehicle} for ${currentPrice}!`;
+            successMsg.style.display = 'block';
+            
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 4000);
+            
+            console.log('SUV Purchase confirmed:', {
+                vehicle: currentVehicle,
+                price: currentPrice,
+                description: currentDescription,
+                category: 'suv',
+                timestamp: new Date().toISOString()
+            });
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('purchaseModal');
+            if (event.target == modal) {
+                closePurchaseModal();
+            }
+        }
+    </script>
+</body>
+</html>
