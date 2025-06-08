@@ -1,0 +1,20 @@
+<h2>Leave a Comment</h2>
+<form action="/comments/add" method="POST">
+  <input type="hidden" name="inv_id" value="<%= vehicle.inv_id %>">
+  <label for="commenter_name">Name:</label>
+  <input type="text" name="commenter_name" required>
+  <label for="comment_text">Comment:</label>
+  <textarea name="comment_text" required></textarea>
+  <button type="submit">Submit</button>
+</form>
+
+<h2>Comments</h2>
+<% if (comments && comments.length > 0) { %>
+  <% comments.forEach(c => { %>
+    <p><strong><%= c.commenter_name %></strong> (<%= new Date(c.comment_date).toLocaleString() %>)</p>
+    <p><%= c.comment_text %></p>
+    <hr>
+  <% }) %>
+<% } else { %>
+  <p>No comments yet.</p>
+<% } %>
