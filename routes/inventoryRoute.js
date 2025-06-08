@@ -5,6 +5,8 @@ const invController = require("../controllers/invController");
 const utilities = require("../utilities/index");
 const { buildDeleteView } = require("../controllers/invController");
 
+// Route to get vehicles details comment
+router.get("/detail/:invId", invController.buildVehicleDetail);
 
 // Route to build inventory by classification view
 router.get("/type/:classificationId", invController.buildByClassificationId);
