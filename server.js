@@ -17,7 +17,6 @@ const cookieParser = require("cookie-parser");
 const commentsRoute = require("./routes/commentsRoute");
 
 
-
 /* ***********************
  * Middleware to inject nav into all renders
  *************************/
@@ -83,6 +82,9 @@ app.get("/", utilities.handleErrors(baseController.buildHome));
 
 // Account routes
 app.use("/account", accountRoute);
+
+// Comments
+app.use("/comments", commentsRoute);
 
 // 404 route must be last
 app.use(async (req, res, next) => {
