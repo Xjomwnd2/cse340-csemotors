@@ -1,67 +1,36 @@
-// Needed Resources 
-const express = require("express");
-const router = new express.Router(); 
-const invController = require("../controllers/invController");
-const utilities = require("../utilities/index");
-const { buildDeleteView } = require("../controllers/invController");
-
-// Route to get vehicles details comment
-router.get("/detail/:invId", invController.buildVehicleDetail);
+const express = require("express")
+const router = new express.Router() 
+const invController = require("../controllers/inventoryController")
+const utilities = require("../utilities/")
+const invValidate = require('../utilities/inventory-validation')
 
 // Route to build inventory by classification view
-router.get("/type/:classificationId", invController.buildByClassificationId);
+router.get("/type/:classificationId", utilities.handleErrors(invController.buildByClassificationId));
 
-// Route to delete
-router.get("/delete/:inv_id", invController.buildDeleteView);
+// Route to build vehicle detail view
+router.get("/detail/:invId", utilities.handleErrors(invController.buildByInventoryId));
 
-// Route to post inventory by classification view
-router.post("/update/", invController.updateInventory);
+// Route to build management view
+router.get("/", utilities.handleErrors(invController.buildManagement));
 
-// Existing routes would be here...
+// Route to build add classification view
+router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
 
-// Route to display delete confirmation view
-router.get("/delete/:inv_id", utilities.handleErrors(async (req, res, next) => {
-  try {
-    const inv_id = parseInt(req.params.inv_id);
-    
-    // Call controller function to handle delete confirmation view
-    await invController.buildDeleteView(req, res, next);
-  } catch (error) {
-    next(error);
-  }
-}));
+// Route to process add classification
+router.post("/add-classification", 
+  invValidate.classificationRules(),
+  invValidate.checkClassificationData,
+  utilities.handleErrors(invController.addClassification)
+);
 
-// Route to process the delete request
-router.post("/delete", utilities.handleErrors(async (req, res, next) => {
-  try {
-    // Call controller function to handle the actual deletion
-    await invController.deleteInventoryItem(req, res, next);
-  } catch (error) {
-    next(error);
-  }
-}));
+// Route to build add inventory view
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
 
-// Route to display delete confirmation view
-router.get("/delete/:inv_id", async (req, res, next) => {
-  try {
-    const inv_id = parseInt(req.params.inv_id);
-    
-    // Call controller function to handle delete confirmation view
-    await invController.buildDeleteView(req, res, next);
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Route to process the delete request
-router.post("/delete", async (req, res, next) => {
-  try {
-    // Call controller function to handle the actual deletion
-    await invController.deleteInventoryItem(req, res, next);
-  } catch (error) {
-    next(error);
-  }
-});
+// Route to process add inventory
+router.post("/add-inventory", 
+  invValidate.inventoryRules(),
+  invValidate.checkInventoryData,
+  utilities.handleErrors(invController.addInventory)
+);
 
 module.exports = router;
-
