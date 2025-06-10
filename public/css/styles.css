@@ -773,9 +773,9 @@ input:valid {
   34%, 66% { content: ".."; }
   67%, 100% { content: "..."; }
 }
-// ============================================================================
+/* ============================================================================
 // ADDITIONAL CSS FOR ADD CLASSIFICATION FORM (public/css/styles.css)
-// ============================================================================
+// ============================================================================ */
 
 /* Add Classification Form Specific Styles */
 .form-instructions {
@@ -890,3 +890,149 @@ input[type="submit"]:hover {
   padding: 15px;
   border-radius: 5px;
 }
+/* ************ VEHICLE DETAILS ******************* */
+   
+/* *************************************** */
+/* Vehicle Detail Styles */
+.vehicle-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.vehicle-image-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.vehicle-detail-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.vehicle-info-section {
+  padding: 1rem;
+}
+
+.vehicle-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.vehicle-price-section {
+  margin-bottom: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #007bff;
+}
+
+.price-label {
+  display: block;
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.vehicle-price {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.vehicle-specs {
+  margin-bottom: 2rem;
+}
+
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+.spec-row:last-child {
+  border-bottom: none;
+}
+
+.spec-label {
+  font-weight: bold;
+  color: #555;
+  width: 30%;
+}
+
+.spec-value {
+  color: #333;
+  width: 65%;
+  text-align: right;
+}
+
+.vehicle-description {
+  margin-top: 2rem;
+}
+
+.vehicle-description h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.vehicle-description p {
+  line-height: 1.6;
+  color: #555;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .vehicle-detail-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .vehicle-title {
+    font-size: 1.5rem;
+  }
+  
+  .vehicle-price {
+    font-size: 2rem;
+  }
+  
+  .spec-row {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  
+  .spec-label,
+  .spec-value {
+    width: 100%;
+    text-align: left;
+  }
+  
+  .spec-value {
+    font-weight: normal;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .vehicle-detail-container {
+    padding: 0.5rem;
+  }
+  
+  .vehicle-price-section {
+    text-align: center;
+  }
+  
+  .vehicle-price {
+    font-size: 1.8rem;
+  }
+}
+*/
