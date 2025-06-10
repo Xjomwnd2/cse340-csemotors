@@ -48,6 +48,12 @@ app.use(session({
   }
 }));
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json()); // optional but helpful for JSON-based APIs
+
+app.post('/login', login);
+
+
 app.use(cookieParser());
 
 app.use(require('connect-flash')());
