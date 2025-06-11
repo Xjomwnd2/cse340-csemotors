@@ -2,6 +2,7 @@ const utilities = require("../utilities");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const accountModel = require("../models/account-model");
+const regResult = await accountModel.registerAccount(firstname, lastname, email, hashedPassword);
 require("dotenv").config();
 
 
