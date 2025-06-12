@@ -85,6 +85,9 @@ app.get("/", baseController.buildHome);
 // Inventory routes
 app.use("/inv", inventoryRoute);
 
+// Connect the /inv route
+app.use('/inv', invRoute);
+
 // Home route — no need to pass nav explicitly now
 app.get("/", utilities.handleErrors(baseController.buildHome));
 
