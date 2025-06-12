@@ -33,9 +33,17 @@
     <!-- Update Account Information Link (for all users) -->
     <p><a href="/account/update/<%= locals.accountData.account_id %>">Update Account Information</a></p>
     
+    
     <!-- Inventory Management (only for Employee/Admin) -->
     <% if (locals.accountData.account_type === "Employee" || locals.accountData.account_type === "Admin") { %>
         <h3>Inventory Management</h3>
         <p><a href="/inv">Access Inventory Management</a></p>
     <% } %>
 <% } %>
+
+<!-- views/inventory/management.ejs -->
+<h1>Inventory Management</h1>
+<ul>
+  <li><a href="/inv/add-classification">Add Classification</a></li>
+  <li><a href="/inv/add-vehicle">Add Vehicle</a></li>
+</ul>
