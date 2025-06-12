@@ -182,6 +182,23 @@ async function buildDeleteView(req, res, next) {
 }
 
 /* ***************************
+ *  Build Inventory Management View
+ * ************************** */
+// controllers/invController.js
+const buildManagementView = (req, res) => {
+  res.render("inventory/management", {
+    title: "Inventory Management",
+    message: null
+  });
+};
+
+module.exports = {
+  buildManagementView
+};
+
+
+
+/* ***************************
  *  Export Controller
  * ************************** */
 module.exports = {
@@ -191,4 +208,5 @@ module.exports = {
   updateInventory: invCont.updateInventory,
   buildDeleteView,
   buildVehicleDetail: invCont.buildVehicleDetail, // ✅ add this
+  buildManagementView: invCont.buildManagementView //
 };
