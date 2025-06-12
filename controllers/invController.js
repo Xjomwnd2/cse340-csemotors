@@ -201,7 +201,6 @@ module.exports = {
   editInventoryView: invCont.editInventoryView,
   getInventoryJSON: invCont.getInventoryJSON,
   updateInventory: invCont.updateInventory,
-  buildManagementView,
   buildDeleteView,
   buildVehicleDetail: invCont.buildVehicleDetail, 
   buildManagementView: invCont.buildManagementView 
