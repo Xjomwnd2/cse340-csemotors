@@ -185,10 +185,11 @@ async function buildDeleteView(req, res, next) {
  *  Build Inventory Management View
  * ************************** */
 // controllers/invController.js
-const buildManagementView = (req, res) => {
-  res.render("inventory/management", {
+invCont.buildManagementView = async function (req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("./inventory/management", {
     title: "Inventory Management",
-    message: null
+    nav,
   });
 };
 
