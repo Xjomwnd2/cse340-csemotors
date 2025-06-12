@@ -192,12 +192,6 @@ const buildManagementView = (req, res) => {
   });
 };
 
-module.exports = {
-  buildManagementView
-};
-
-
-
 /* ***************************
  *  Export Controller
  * ************************** */
@@ -206,6 +200,7 @@ module.exports = {
   editInventoryView: invCont.editInventoryView,
   getInventoryJSON: invCont.getInventoryJSON,
   updateInventory: invCont.updateInventory,
+  buildManagementView,
   buildDeleteView,
   buildVehicleDetail: invCont.buildVehicleDetail, // ✅ add this
   buildManagementView: invCont.buildManagementView // ✅ newly added!
