@@ -208,5 +208,5 @@ module.exports = {
   updateInventory: invCont.updateInventory,
   buildDeleteView,
   buildVehicleDetail: invCont.buildVehicleDetail, // ✅ add this
-  buildManagementView: invCont.buildManagementView //
+  buildManagementView: invCont.buildManagementView // ✅ newly added!
 };
