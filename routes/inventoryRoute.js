@@ -18,6 +18,17 @@ router.get("/delete/:inv_id", invController.buildDeleteView);
 router.post("/update/", invController.updateInventory);
 
 // Existing routes would be here...
+// Inventory Management View
+router.get("/", utilities.handleErrors(invController.buildManagementView));
+
+// Add Classification Form
+router.get("/add-classification", utilities.handleErrors(invController.buildAddClassification));
+
+// Add Inventory Form
+router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
+
+// (optional: if you already created POSTs for form submissions, include them too)
+
 
 // Route to display delete confirmation view
 router.get("/delete/:inv_id", utilities.handleErrors(async (req, res, next) => {
