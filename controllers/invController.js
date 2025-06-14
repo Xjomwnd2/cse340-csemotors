@@ -182,6 +182,28 @@ async function buildDeleteView(req, res, next) {
 }
 
 /* ***************************
+ *  buildAddClassification
+ *  buildAddInventory
+ * ************************** */
+async function buildAddClassification(req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    errors: null,
+  });
+}
+
+async function buildAddInventory(req, res, next) {
+  const nav = await utilities.getNav();
+  res.render("inventory/add-inventory", {
+    title: "Add New Vehicle",
+    nav,
+    errors: null,
+  });
+}
+
+/* ***************************
  *  Build Inventory Management View
  * ************************** */
 // controllers/invController.js
@@ -203,5 +225,8 @@ module.exports = {
   updateInventory: invCont.updateInventory,
   buildDeleteView,
   buildVehicleDetail: invCont.buildVehicleDetail, 
-  buildManagementView: invCont.buildManagementView 
+  buildManagementView: invCont.buildManagementView,
+  buildAddClassification,
+  buildAddInventory
+  // other functions... 
 };
