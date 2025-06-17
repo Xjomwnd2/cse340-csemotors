@@ -78,41 +78,6 @@ Util.buildClassificationGrid = async function (data) {
   return grid;
 };
 
-/* *********************************************
- * Build the vehicle detail view HTML END *ADD*
- ******************************************** */
-
-function buildVehicleDetail(vehicle) {
-  const usdPrice = vehicle.inv_price.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD",
-  });
-
-  const mileage = vehicle.inv_miles.toLocaleString("en-US");
-
-  return `
-  <div class="vehicle-detail">
-    <div class="vehicle-image">
-      <img src="${vehicle.inv_image}" alt="Image of ${vehicle.inv_make} ${vehicle.inv_model}">
-    </div>
-    <div class="vehicle-info">
-      <h2>${vehicle.inv_make} ${vehicle.inv_model} (${vehicle.inv_year})</h2>
-      <p><strong>Price:</strong> ${usdPrice}</p>
-      <p><strong>Mileage:</strong> ${mileage} miles</p>
-      <p><strong>Description:</strong> ${vehicle.inv_description}</p>
-      <p><strong>Color:</strong> ${vehicle.inv_color}</p>
-    </div>
-  </div>
-  `;
-}
-
-module.exports = {
-  getNav,
-  buildVehicleDetail,
-  // any other exports...
-};
-
-
 Util.buildVehicleDetailHTML = async function (vehicle) {
   if (vehicle) {
     let detailHTML = '<div class="vehicle-detail">';
