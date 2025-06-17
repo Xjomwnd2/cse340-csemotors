@@ -114,9 +114,6 @@ Util.buildVehicleDetailHTML = async function (vehicle) {
   }
 };
 
-
-
-
 /* ************************
  * Build classification list for dropdown
  ************************** */
