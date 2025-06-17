@@ -191,7 +191,7 @@ async function buildAddClassification(req, res, next) {
     title: "Add New Classification",
     nav,
     errors: null,
-    messages: [] // ✅ ADD THIS LINE to prevent forEach crash
+    messages: [] // ADD THIS LINE to prevent forEach crash
   });
 }
 
