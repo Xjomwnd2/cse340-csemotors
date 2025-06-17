@@ -9,12 +9,14 @@
 <% } %>
 
 <!-- Display Flash Messages -->
-<% if (locals.messages) { %>
-    <ul class="notice">
-        <% locals.messages.forEach(message => { %>
-            <li><%= message %></li>
-        <% }) %>
-    </ul>
+<% if (Array.isArray(locals.messages)) { %>
+  <ul class="notice">
+    <% locals.messages.forEach(message => { %>
+      <li><%= message %></li>
+    <% }) %>
+  </ul>
+<% } else if (locals.messages) { %>
+  <p class="notice"><%= locals.messages %></p>
 <% } %>
 
 <!-- Display Validation Errors -->
