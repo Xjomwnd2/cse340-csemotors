@@ -232,9 +232,6 @@ invCont.buildManagementView = async function (req, res, next) {
   });
 };
 
-const invModel = require("../models/inv-model");
-const utilities = require("../utilities");
-
 async function buildByInventoryId(req, res, next) {
   const inv_id = req.params.inv_id;
   const nav = await utilities.getNav();
