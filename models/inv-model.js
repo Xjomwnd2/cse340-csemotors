@@ -1,6 +1,6 @@
 // models/inv-model.js
 
-const pool = require("../database/")
+const pool = require("../database");
 
 /* =======================
    Get all inventory data
