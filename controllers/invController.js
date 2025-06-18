@@ -195,13 +195,29 @@ async function buildAddClassification(req, res, next) {
   });
 }
 
-async function buildAddInventory(req, res, next) {
-  const nav = await utilities.getNav();
-  res.render("inventory/add-inventory", {
-    title: "Add New Vehicle",
-    nav,
-    errors: null,
-  });
+  async function buildByInventoryId(req, res, next) {
+  const inv_id = req.params.inv_id;
+  let nav = await utilities.getNav();
+
+  try {
+    const vehicleData = await invModel.getVehicleById(inv_id);
+    if (!vehicleData) {
+      throw new Error("Vehicle not found");
+    }
+
+    res.render("inventory/detail", {
+      title: `${vehicleData.inv_make} ${vehicleData.inv_model}`,
+      nav,
+      vehicle: vehicleData
+    });
+  } catch (error) {
+    console.error("Vehicle Detail Error:", error);
+    res.status(500).render("errors/error", {
+      title: "Server Error",
+      nav,
+      message: "Vehicle not found. Please check the ID."
+    });
+  }
 }
 
 /* ***************************
@@ -216,6 +232,34 @@ invCont.buildManagementView = async function (req, res, next) {
   });
 };
 
+const invModel = require("../models/inv-model");
+const utilities = require("../utilities");
+
+async function buildByInventoryId(req, res, next) {
+  const inv_id = req.params.inv_id;
+  const nav = await utilities.getNav();
+
+  try {
+    const vehicle = await invModel.getVehicleById(inv_id);
+    if (!vehicle) {
+      throw new Error("Vehicle not found");
+    }
+
+    res.render("inventory/detail", {
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+      nav,
+      vehicle,
+    });
+  } catch (error) {
+    console.error("Error loading vehicle details:", error);
+    res.status(500).render("errors/error", {
+      title: "Server Error",
+      nav,
+      message: "Vehicle not found or a server error occurred.",
+    });
+  }
+}
+
 /* ***************************
  *  Export Controller
  * ************************** */
@@ -225,6 +269,7 @@ module.exports = {
   getInventoryJSON: invCont.getInventoryJSON,
   updateInventory: invCont.updateInventory,
   buildDeleteView,
+  buildByInventoryId,
   buildVehicleDetail: invCont.buildVehicleDetail, 
   buildManagementView: invCont.buildManagementView,
   buildAddClassification,
