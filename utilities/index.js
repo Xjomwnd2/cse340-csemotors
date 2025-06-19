@@ -178,3 +178,62 @@ Util.handleErrors =
   (fn) => (req, res, next) => Promise.resolve(fn(req, res, next)).catch(next);
 
 module.exports = Util;
+
+// utilities/index.js
+/* ************************
+ * Build the vehicle detail HTML
+ ************************** */
+Util.buildVehicleDetailHTML = async function(vehicle) {
+  let detailHTML = '';
+  
+  if (vehicle) {
+    detailHTML += '<div class="vehicle-detail-wrapper">';
+    
+    // Image section
+    detailHTML += '<div class="vehicle-image-section">';
+    detailHTML += `<img src="${vehicle.inv_image}" `;
+    detailHTML += `alt="Image of ${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}" `;
+    detailHTML += 'class="vehicle-detail-image">';
+    detailHTML += '</div>';
+    
+    // Info section
+    detailHTML += '<div class="vehicle-info-section">';
+    detailHTML += `<h2 class="vehicle-title">${vehicle.inv_year} ${vehicle.inv_make} ${vehicle.inv_model}</h2>`;
+    
+    // Price - formatted as currency
+    detailHTML += '<div class="vehicle-price">';
+    detailHTML += `<span class="price-label">Price: </span>`;
+    detailHTML += `<span class="price-amount">$${new Intl.NumberFormat('en-US').format(vehicle.inv_price)}</span>`;
+    detailHTML += '</div>';
+    
+    // Mileage - formatted with commas
+    detailHTML += '<div class="vehicle-mileage">';
+    detailHTML += `<span class="mileage-label">Mileage: </span>`;
+    detailHTML += `<span class="mileage-amount">${new Intl.NumberFormat('en-US').format(vehicle.inv_miles)} miles</span>`;
+    detailHTML += '</div>';
+    
+    // Additional details
+    detailHTML += '<div class="vehicle-details">';
+    detailHTML += `<p><strong>Exterior Color:</strong> ${vehicle.inv_color}</p>`;
+    detailHTML += `<p><strong>Interior:</strong> ${vehicle.inv_interior || 'Not specified'}</p>`;
+    detailHTML += `<p><strong>Engine:</strong> ${vehicle.inv_engine || 'Not specified'}</p>`;
+    detailHTML += `<p><strong>Transmission:</strong> ${vehicle.inv_transmission || 'Not specified'}</p>`;
+    detailHTML += `<p><strong>Classification:</strong> ${vehicle.classification_name || 'Not specified'}</p>`;
+    detailHTML += '</div>';
+    
+    // Description
+    if (vehicle.inv_description) {
+      detailHTML += '<div class="vehicle-description">';
+      detailHTML += `<h3>Description</h3>`;
+      detailHTML += `<p>${vehicle.inv_description}</p>`;
+      detailHTML += '</div>';
+    }
+    
+    detailHTML += '</div>'; // Close vehicle-info-section
+    detailHTML += '</div>'; // Close vehicle-detail-wrapper
+  } else {
+    detailHTML = '<p class="error-message">Vehicle not found.</p>';
+  }
+  
+  return detailHTML;
+};
