@@ -2,7 +2,8 @@ const commentModel = require("../models/commentsModel");
 
 async function postComment(req, res, next) {
   try {
-    const { inv_id, commenter_name, comment_text } = req.body;
+    const inv_id = parseInt(req.params.invId); // ✅ Get vehicle ID from URL
+    const { commenter_name, comment_text } = req.body;
 
     // ✅ Basic input validation
     if (!inv_id || !commenter_name || !comment_text) {
@@ -33,7 +34,7 @@ async function postComment(req, res, next) {
   } catch (err) {
     console.error("Comment post failed:", err.message);
     req.flash("error", "Oops! Something went wrong submitting your comment.");
-    res.redirect(`/inv/detail/${req.body.inv_id || ""}`);
+    res.redirect(`/inv/detail/${req.params.invId || ""}`);
   }
 }
 
