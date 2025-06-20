@@ -1,4 +1,4 @@
-const invModel = require("../models/inv-model");
+const invModel = require("../models/inventory-model");
 const utilities = require("../utilities/");
 const { getCommentsByInvId } = require("../models/commentsModel"); // ✅ Comment model
 const { getInventoryById } = require("../models/inventory-model");
