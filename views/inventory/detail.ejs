@@ -2,11 +2,36 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header') %>
 <%- include('../partials/navigation') %>
-
 <main>
   <h1><%= title %></h1>
-  <%- vehicleDetailHTML %>
-  <%- grid %>
+  <%- vehicleDetail %>
+
+  <section>
+    <h2>Leave a Comment</h2>
+    <form action="/inv/comment" method="POST">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="comment">Your Comment:</label>
+      <textarea id="comment" name="comment" required></textarea>
+
+      <input type="hidden" name="inv_id" value="<%= vehicle.inv_id || 0 %>">
+      <button type="submit">Submit Comment</button>
+    </form>
+  </section>
+
+  <section>
+    <h2>Comments</h2>
+    <% if (comments && comments.length > 0) { %>
+      <ul>
+        <% comments.forEach(comment => { %>
+          <li><strong><%= comment.name %></strong>: <%= comment.comment %></li>
+        <% }); %>
+      </ul>
+    <% } else { %>
+      <p>No comments yet. Be the first to comment!</p>
+    <% } %>
+  </section>
 </main>
 
 <%- include('../partials/footer') %>
