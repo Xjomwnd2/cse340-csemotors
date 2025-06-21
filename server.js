@@ -117,7 +117,7 @@ app.use(async (err, req, res, next) => {
 /* ***********************
  * Server listen
  *************************/
-const port = process.env.PORT || 5500;
+const port = process.env.PORT || 5501;
 const host = process.env.HOST || 'localhost';
 
 app.listen(port, () => {
