@@ -270,6 +270,5 @@ module.exports = {
   buildVehicleDetail: invCont.buildVehicleDetail, 
   buildManagementView: invCont.buildManagementView,
   buildAddClassification,
-  buildByInvId
   // other functions... 
 };
