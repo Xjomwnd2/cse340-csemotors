@@ -74,9 +74,5 @@ router.post("/delete", async (req, res, next) => {
   }
 });
 
-// Near the bottom
-router.get("/detail/:inv_id", invController.buildByInvId);
-
-
 module.exports = router;
 
