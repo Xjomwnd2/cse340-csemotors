@@ -28,8 +28,7 @@ router.get("/add-classification", utilities.handleErrors(invController.buildAddC
 router.get("/add-inventory", utilities.handleErrors(invController.buildAddInventory));
 
 // (optional: if you already created POSTs for form submissions, include them too)
-router.post("/comment", invController.submitComment);
-
+router.post("/add", invController.buildAddInventory);
 
 
 // Route to display delete confirmation view
