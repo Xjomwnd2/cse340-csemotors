@@ -257,6 +257,11 @@ async function buildByInventoryId(req, res, next) {
   }
 }
 
+const buildAddInventory = (req, res) => {
+  res.send("Inventory added!");
+};
+
+
 /* ***************************
  *  Export Controller
  * ************************** */
@@ -270,5 +275,6 @@ module.exports = {
   buildVehicleDetail: invCont.buildVehicleDetail, 
   buildManagementView: invCont.buildManagementView,
   buildAddClassification,
+  buildAddInventory
   // other functions... 
 };
