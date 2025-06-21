@@ -14,7 +14,7 @@ const pool = require('./database/');
 const accountRoute = require("./routes/accountRoute");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const commentsRoute = require("./routes/commentsRoute");
+const commentsRoute = require("./routes/commentRoute");
 const { login } = require('./controllers/authController');
 const invRoute = require('./routes/invRoute');
 
