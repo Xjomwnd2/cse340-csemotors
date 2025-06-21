@@ -29,6 +29,7 @@ router.get("/add-inventory", utilities.handleErrors(invController.buildAddInvent
 
 // (optional: if you already created POSTs for form submissions, include them too)
 router.post("/comment", invController.submitComment);
+router.post("/add", invController.addInventory); // for example
 
 
 // Route to display delete confirmation view
