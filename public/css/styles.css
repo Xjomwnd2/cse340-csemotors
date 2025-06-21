@@ -1036,3 +1036,27 @@ input[type="submit"]:hover {
   }
 }
 */
+
+/* VEHICLE DETAILS */
+.vehicle-detail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.vehicle-detail img {
+  max-width: 100%;
+  height: auto;
+  flex: 1 1 300px;
+}
+
+.vehicle-info {
+  flex: 1 1 300px;
+}
+
+@media (max-width: 768px) {
+  .vehicle-detail {
+    flex-direction: column;
+  }
+}
