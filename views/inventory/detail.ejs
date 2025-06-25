@@ -7,31 +7,35 @@
   <%- vehicleDetail %>
 
   <section>
-    <h2>Leave a Comment</h2>
-    <form action="/inv/comment" method="POST">
-      <label for="name">Your Name:</label>
-      <input type="text" id="name" name="name" required>
+  <h2>Leave a Comment</h2>
+  <form action="/comments/add/<%= vehicle.inv_id %>" method="POST">
+    <label for="commenter_name">Your Name:</label>
+    <input type="text" id="commenter_name" name="commenter_name" required>
 
-      <label for="comment">Your Comment:</label>
-      <textarea id="comment" name="comment" required></textarea>
+    <label for="comment_text">Your Comment:</label>
+    <textarea id="comment_text" name="comment_text" required></textarea>
 
-      <input type="hidden" name="inv_id" value="<%= vehicle.inv_id || 0 %>">
-      <button type="submit">Submit Comment</button>
-    </form>
-  </section>
+    <button type="submit">Submit Comment</button>
+  </form>
+</section>
 
-  <section>
-    <h2>Comments</h2>
-    <% if (comments && comments.length > 0) { %>
-      <ul>
-        <% comments.forEach(comment => { %>
-          <li><strong><%= comment.name %></strong>: <%= comment.comment %></li>
-        <% }); %>
-      </ul>
-    <% } else { %>
-      <p>No comments yet. Be the first to comment!</p>
-    <% } %>
-  </section>
+<section>
+  <h2>Comments</h2>
+  <% if (comments && comments.length > 0) { %>
+    <ul>
+      <% comments.forEach(comment => { %>
+        <li>
+          <strong><%= comment.commenter_name %></strong>
+          (<%= new Date(comment.comment_date).toLocaleString() %>): 
+          <%= comment.comment_text %>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No comments yet. Be the first to comment!</p>
+  <% } %>
+</section>
+
 </main>
 
 <%- include('../partials/footer') %>
