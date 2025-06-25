@@ -79,9 +79,6 @@ app.set("layout", "./layouts/layout");
 // Public route
 app.use(express.static("public"));
 
-//Index route
-app.get("/", baseController.buildHome);
-
 // Inventory routes
 app.use("/inv", inventoryRoute);
 
