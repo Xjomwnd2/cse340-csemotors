@@ -79,11 +79,11 @@ app.set("layout", "./layouts/layout");
 // Public route
 app.use(express.static("public"));
 
-// Inventory routes
-app.use("/inv", inventoryRoute);
-
 // Home route — no need to pass nav explicitly now
 app.get("/", utilities.handleErrors(baseController.buildHome));
+
+// Inventory routes
+app.use("/inv", inventoryRoute);
 
 // Account routes
 app.use("/account", accountRoute);
@@ -95,8 +95,6 @@ app.use("/comments", commentsRoute);
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'});
 });
-
-router.get("/detail/:invId", invController.buildByInventoryId);
 
 /* ***********************
  * Error Handler
